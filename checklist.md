@@ -5,12 +5,12 @@
 
 *12/26/21*
 
-- [ ] npm installs, .env file
-- [ ] component setup
-- [ ] watch lay of land videos
+- [x] npm installs, .env file
+- [x] watch lay of land videos
+- [ ] navbar header setup
 
 *12/27/21*
 
-- [ ] navbar header setup
 - [ ] navbar footer setup
+- [ ] component setup
 - [ ] About page
