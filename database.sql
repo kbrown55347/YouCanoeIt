@@ -10,3 +10,18 @@ CREATE TABLE "user" (
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL
 );
+
+CREATE TABLE "trips" (
+	"id" SERIAL PRIMARY KEY,
+	"trip_name" VARCHAR (1000) NOT NULL,
+	"start_date" DATE,
+	"end_date" DATE,
+	"entry_point" VARCHAR (1000),
+	"exit_point" VARCHAR (1000),
+	"longest_portage" VARCHAR (1000),
+	"lakes" VARCHAR (1000),
+	"comments" VARCHAR (1000),
+	"image_url" VARCHAR,
+	"image_description" VARCHAR (1000), 
+	"user_id" INT REFERENCES "user"
+);

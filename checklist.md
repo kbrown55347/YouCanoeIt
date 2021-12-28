@@ -1,16 +1,14 @@
-## Daily To Do's:
+To Do:
  - Don't forget to branch
 
 
+- User Page (Past Trips) Setup:
+    - [x] setup db
+    - [x] add dummy data to db
 
-*12/26/21*
+    - [ ] setup past trips reducer
+    - [ ] setup saga function to GET past trip information from db
+    - [ ] setup dispatch of information from saga function to reducer
+    - [ ] setup dispatch on user page to trigger GET past trips route
+    - [ ] map through reducer to display past trips
 
-- [x] npm installs, .env file
-- [x] watch lay of land videos
-- [ ] navbar header setup
-
-*12/27/21*
-
-- [ ] navbar footer setup
-- [ ] component setup
-- [ ] About page
