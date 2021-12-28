@@ -7,7 +7,8 @@ const router = express.Router();
  */
 router.get('/', (req, res) => {
   // GET past trips route code
-  res.send(200);
+  console.log('req.user', req.user);
+  res.sendStatus(200);
 });
 
 /**

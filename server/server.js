@@ -27,7 +27,7 @@ app.use(passport.session());
 // user route - user login, logout, register
 app.use('/api/user', userRouter);
 // past trips route
-app.use('api/past_trips', pastTripsRouter);
+app.use('/api/past_trips', pastTripsRouter);
 
 // Serve static files
 app.use(express.static('build'));

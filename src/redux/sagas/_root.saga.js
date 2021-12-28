@@ -18,4 +18,4 @@ export default function* rootSaga() {
     userSaga(),
     pastTripsSaga(), // past trips saga
   ]);
-}
+};
