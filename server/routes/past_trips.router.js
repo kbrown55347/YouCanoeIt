@@ -6,7 +6,8 @@ const router = express.Router();
  * GET route template
  */
 router.get('/', (req, res) => {
-  // GET route code here
+  // GET past trips route code
+  res.send(200);
 });
 
 /**
