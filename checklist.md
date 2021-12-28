@@ -4,9 +4,9 @@ To Do:
 
 - User Page (Past Trips) Setup:
     - [x] setup db
-    - [x] add dummy data to db
+    - [x] add dummy data to dbjh
 
-    - [ ] setup past trips reducer
+    - [x] setup past trips reducer
     - [ ] setup saga function to GET past trip information from db
     - [ ] setup dispatch of information from saga function to reducer
     - [ ] setup dispatch on user page to trigger GET past trips route
