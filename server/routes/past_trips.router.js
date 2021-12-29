@@ -5,7 +5,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 // This route returns logged in users past trips
 router.get('/', rejectUnauthenticated, (req, res) => {
-  console.log('req.user', req.user);
+  // console.log('req.user', req.user);
 
   let queryText;
   let queryValues;

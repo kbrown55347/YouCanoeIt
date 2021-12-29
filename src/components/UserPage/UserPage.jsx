@@ -7,9 +7,13 @@ import { useHistory } from 'react-router-dom';
 import { Button, Grid } from '@mui/material';
 
 function UserPage() {
+  // to access reducers in this component
   const user = useSelector((store) => store.user);
+  const pastTrips = useSelector(store => store.pastTrips);
+
   const dispatch = useDispatch();
   const history = useHistory();
+
 
   // on page load fetch past trips
   useEffect(() => {
@@ -40,6 +44,10 @@ function UserPage() {
         >Add Trip
         </Button>
       </Grid>
+
+      <div>
+
+      </div>
 
     </div>
   );
