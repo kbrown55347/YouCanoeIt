@@ -1,21 +1,25 @@
 import React from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 // MUI imports
 import { Button, Grid } from '@mui/material';
 
 function UserPage() {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   // on page load fetch past trips
   useEffect(() => {
     dispatch({ type: 'FETCH_PAST_TRIPS' })
   }, []);
 
-
-  // add function to send user to add trip page on click of button
+  // send user to add trip page on click of Add Trip button
+  const handleAddTripClick = () => {
+    history.push('/add');
+  };
 
   return (
     <div className="container">
@@ -32,8 +36,8 @@ function UserPage() {
         <Button
           variant="contained"
           style={{ backgroundColor: '#8fa253', color: 'white' }}
-        // onClick={function to send user to add trip page}
-        > Add Trip
+          onClick={handleAddTripClick}
+        >Add Trip
         </Button>
       </Grid>
 
