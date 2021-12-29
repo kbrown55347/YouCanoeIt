@@ -6,6 +6,9 @@ import { useHistory } from 'react-router-dom';
 // MUI imports
 import { Button, Grid } from '@mui/material';
 
+// import css
+import './UserPage.css';
+
 function UserPage() {
   // to access reducers in this component
   const user = useSelector((store) => store.user);
@@ -48,32 +51,21 @@ function UserPage() {
       {/* map through pastTrips reducer and append each item to DOM */}
       {pastTrips.map(trip => (
         <div key={trip.id} className="trips_list">
-
-          <Grid
-            container
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
+          {trip.trip_name}
+          <br></br>
+          {trip.start_date} to {trip.end_date}
+          <br></br>
+          <img
+            src={trip.image_url}
+            alt='trip image'
           >
-            {trip.trip_name}
-            <br></br>
-            start date: {trip.start_date}
-            <br></br>
-            end date: {trip.end_date}
-            <br></br>
-            <img
-              src={trip.image_url}
-              alt='trip image'
-            >
-            </img>
-            <br></br>
-            <Button
-              variant="contained"
-              style={{ backgroundColor: '#8fa253', color: 'white' }}
-            >View Details</Button>
-            <br></br>
-
-          </Grid>
+          </img>
+          <br></br>
+          <Button
+            variant="contained"
+            style={{ backgroundColor: '#8fa253', color: 'white' }}
+          >View Details</Button>
+          <br></br>
         </div>
       ))}
 
