@@ -17,7 +17,6 @@ function UserPage() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-
   // on page load fetch past trips
   useEffect(() => {
     dispatch({ type: 'FETCH_PAST_TRIPS' })
@@ -66,7 +65,7 @@ function UserPage() {
             style={{ backgroundColor: '#8fa253', color: 'white' }}
             // send user to trip details page on click of View Details button
             onClick={() => {
-              history.push('/trip_details');
+              history.push(`/trip_details/${trip.id}`);
             }}
           >View Details</Button>
           <br></br>

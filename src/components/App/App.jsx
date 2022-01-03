@@ -81,7 +81,7 @@ function App() {
           <ProtectedRoute
             // logged in shows TripDetails else shows LoginPage
             exact
-            path="/trip_details"
+            path="/trip_details/:id"
           >
             <TripDetails />
           </ProtectedRoute>
