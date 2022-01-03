@@ -17,16 +17,10 @@ function UserPage() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-
   // on page load fetch past trips
   useEffect(() => {
     dispatch({ type: 'FETCH_PAST_TRIPS' })
   }, []);
-
-  // send user to add trip page on click of Add Trip button
-  const handleAddTripClick = () => {
-    history.push('/add');
-  };
 
   return (
     <div className="container">
@@ -43,7 +37,10 @@ function UserPage() {
         <Button
           variant="contained"
           style={{ backgroundColor: '#8fa253', color: 'white' }}
-          onClick={handleAddTripClick}
+          // send user to add trip page on click of Add Trip button
+          onClick={() => {
+            history.push('/add');
+          }}
         >Add Trip
         </Button>
       </Grid>
@@ -53,7 +50,9 @@ function UserPage() {
         <div key={trip.id} className="trips_list">
           {trip.trip_name}
           <br></br>
-          {trip.start_date} to {trip.end_date}
+          {/* using .slice(0,10) to only return dates and get rid
+          of extras */}
+          {trip.start_date.slice(0,10)} to {trip.end_date.slice(0,10)}
           <br></br>
           <img
             src={trip.image_url}
@@ -64,12 +63,17 @@ function UserPage() {
           <Button
             variant="contained"
             style={{ backgroundColor: '#8fa253', color: 'white' }}
+            // send user to trip details page on click of View Details button
+            onClick={() => {
+              history.push(`/trip_details/${trip.id}`);
+            }}
           >View Details</Button>
           <br></br>
         </div>
-      ))}
+      ))
+      }
 
-    </div>
+    </div >
   );
 }
 

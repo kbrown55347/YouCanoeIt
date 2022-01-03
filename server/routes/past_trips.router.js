@@ -18,14 +18,41 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   queryValues = [req.user.id]
 
   pool.query(queryText, queryValues)
-    .then((result) => {
-      res.send(result.rows);
+    .then((dbRes) => {
+      res.send(dbRes.rows);
     })
-    .catch((error) => {
-      console.log(error);
+    .catch((dbErr) => {
+      console.log(dbErr);
       res.sendStatus(500);
     });
 });
+
+
+// get past trip details
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+  const queryText = `
+  SELECT * FROM "trips"
+    WHERE "id"=$1;
+  `
+  const queryValue = [req.params.id];
+  // console.log('in details get route', queryValue)
+
+  pool.query(queryText, queryValue)
+  .then((dbRes) => {
+    // console.log('In get past trip details', dbRes.rows[0])
+    res.send(dbRes.rows[0]);
+  })
+  .catch((dbErr) => {
+    console.log(dbErr);
+    res.sendStatus(500);
+  });
+});
+
+
+
+
+
+
 
 /**
  * POST route template
