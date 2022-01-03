@@ -18,11 +18,11 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   queryValues = [req.user.id]
 
   pool.query(queryText, queryValues)
-    .then((result) => {
-      res.send(result.rows);
+    .then((dbRes) => {
+      res.send(dbRes.rows);
     })
-    .catch((error) => {
-      console.log(error);
+    .catch((dbErr) => {
+      console.log(dbErr);
       res.sendStatus(500);
     });
 });
@@ -30,15 +30,22 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 // get past trip details
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-  const sqlQuery = `
+  const queryText = `
   SELECT * FROM "trips"
-    WHERE "id"=$;
+    WHERE "id"=$1;
   `
+  const queryValue = [req.params.id];
+  // console.log('in details get route', queryValue)
 
-  const sqlValue = req.params.id;
-  console.log('in details get route', sqlValue)
-
-  res.sendStatus(200);
+  pool.query(queryText, queryValue)
+  .then((dbRes) => {
+    // console.log('In get past trip details', dbRes.rows)
+    res.send(dbRes.rows);
+  })
+  .catch((dbErr) => {
+    console.log(dbErr);
+    res.sendStatus(500);
+  });
 });
 
 

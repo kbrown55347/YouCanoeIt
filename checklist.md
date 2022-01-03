@@ -4,7 +4,7 @@
 *Refer to Movies Saga Project*
 - [x] setup view trip details component
 - [x] (user page) route user to view trip details page on click of view details
-- [ ] Server route that will send back "details" data for one trip
+- [x] Server route that will send back "details" data for one trip
 - [ ] Saga function to grab data we need for "details" view
 - [ ] Create reducer to hold current "details" data
     will return object like:
