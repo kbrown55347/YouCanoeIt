@@ -27,6 +27,26 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     });
 });
 
+
+// get past trip details
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+  const sqlQuery = `
+  SELECT * FROM "trips"
+    WHERE "id"=$;
+  `
+
+  const sqlValue = req.params.id;
+  console.log('in details get route', sqlValue)
+
+  res.sendStatus(200);
+});
+
+
+
+
+
+
+
 /**
  * POST route template
  */
