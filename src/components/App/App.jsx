@@ -12,7 +12,7 @@ import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
+// page view imports
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
@@ -20,6 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import AddTrip from '../AddTrip/AddTrip';
+import TripDetails from '../TripDetails/TripDetails';
 
 import './App.css';
 
@@ -75,6 +76,14 @@ function App() {
             path="/add"
           >
             <AddTrip />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows TripDetails else shows LoginPage
+            exact
+            path="/trip_details"
+          >
+            <TripDetails />
           </ProtectedRoute>
 
           <Route

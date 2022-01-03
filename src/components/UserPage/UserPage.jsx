@@ -23,11 +23,6 @@ function UserPage() {
     dispatch({ type: 'FETCH_PAST_TRIPS' })
   }, []);
 
-  // send user to add trip page on click of Add Trip button
-  const handleAddTripClick = () => {
-    history.push('/add');
-  };
-
   return (
     <div className="container">
       <h3>Welcome, {user.username}!</h3>
@@ -43,7 +38,10 @@ function UserPage() {
         <Button
           variant="contained"
           style={{ backgroundColor: '#8fa253', color: 'white' }}
-          onClick={handleAddTripClick}
+          // send user to add trip page on click of Add Trip button
+          onClick={() => {
+            history.push('/add');
+          }}
         >Add Trip
         </Button>
       </Grid>
@@ -64,12 +62,17 @@ function UserPage() {
           <Button
             variant="contained"
             style={{ backgroundColor: '#8fa253', color: 'white' }}
+            // send user to trip details page on click of View Details button
+            onClick={() => {
+              history.push('/trip_details');
+            }}
           >View Details</Button>
           <br></br>
         </div>
-      ))}
+      ))
+      }
 
-    </div>
+    </div >
   );
 }
 

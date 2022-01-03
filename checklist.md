@@ -1,14 +1,16 @@
-To Do:
- - Don't forget to branch
+## To Do:
+
+### View Trip Details
+*Refer to Movies Saga Project*
+- [x] setup view trip details component
+- [ ] (user page) route user to view trip details page on click of view details
+- [ ] setup basic HTML of page
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
 
 
-- User Page (Past Trips) Setup:
-    - [x] setup db
-    - [x] add dummy data to dbjh
-    - [x] setup past trips reducer
-    - [x] setup router to DB for past trips
-    - [x] setup dispatch on user page to trigger GET past trips route
-    - [x] setup saga function to GET past trip information from db
-    - [x] setup route of db information from saga function to reducer
-    - [ ] map through reducer to display past trips
+
+
 
