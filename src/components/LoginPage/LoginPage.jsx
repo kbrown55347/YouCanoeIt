@@ -20,6 +20,7 @@ function LoginPage() {
           Register
         </button>
       </center>
+
     </div>
   );
 }
