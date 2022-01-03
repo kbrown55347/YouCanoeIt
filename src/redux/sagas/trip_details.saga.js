@@ -7,9 +7,13 @@ function* fetchTripDetails(action) {
         const response = yield axios({
             method: 'GET',
             url: `api/past_trips/${action.payload}`
-        })
+        });
         console.log('in fetchTripDetails, response.data from DB:', response.data);
         // send to trip details reducer
+        yield put({
+            type: 'SET_TRIP_DETAILS',
+            payload: response.data
+        });
     } catch (err) {
         console.error('fetchTripDetails error', err);
     }

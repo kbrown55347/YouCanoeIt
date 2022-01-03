@@ -9,7 +9,8 @@ function TripDetails() {
     const dispatch = useDispatch();
     // useParams so detail page is aware of clicked item
     const params = useParams();
-    console.log('******** PARAMS:', params);
+    // console.log('******** PARAMS:', params);
+    const tripDetails = useSelector(store => store.tripDetails);
 
     // on page load fetch clicked trip details
     useEffect(() => {
@@ -19,6 +20,8 @@ function TripDetails() {
             payload: params.id
         })
     }, []);
+
+    console.log(tripDetails);
 
     return (
         <div className="container">
