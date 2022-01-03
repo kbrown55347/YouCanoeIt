@@ -39,8 +39,8 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 
   pool.query(queryText, queryValue)
   .then((dbRes) => {
-    // console.log('In get past trip details', dbRes.rows)
-    res.send(dbRes.rows);
+    // console.log('In get past trip details', dbRes.rows[0])
+    res.send(dbRes.rows[0]);
   })
   .catch((dbErr) => {
     console.log(dbErr);
