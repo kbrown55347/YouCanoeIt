@@ -4,13 +4,16 @@ import axios from 'axios';
 // Saga function to GET past trips from DB
 function* fetchPastTrips() {
     try {
-    const response = yield axios({
-        method: 'GET',
-        url: 'api/past_trips'
-    })
-    console.log('in fetchPastTrips, response.data from DB:', response.data);
-    // send to past trips reducer
-
+        const response = yield axios({
+            method: 'GET',
+            url: 'api/past_trips'
+        })
+        console.log('in fetchPastTrips, response.data from DB:', response.data);
+        // send to past trips reducer
+        yield put({
+            type: 'SET_PAST_TRIPS',
+            payload: response.data
+        })
     } catch (err) {
         console.error('fetchPastTrips error', err);
     }
