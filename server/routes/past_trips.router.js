@@ -31,9 +31,15 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 // get past trip details
 router.get('/:id', rejectUnauthenticated, (req, res) => {
+  // calling columns individually so I can customize date for start & end dates
   const queryText = `
-  SELECT * FROM "trips"
-    WHERE "id"=$1;
+  SELECT "id", "trip_name", 
+    TO_CHAR("start_date",'MM-DD-YYYY') AS "start_date", 
+    TO_CHAR("end_date",'MM-DD-YYYY') AS "end_date", 
+    "entry_point", "exit_point", "longest_portage", 
+    "lakes", "comments", "image_url"
+      FROM "trips"
+        WHERE "id"=$1;
   `
   const queryValue = [req.params.id];
   // console.log('in details get route', queryValue)
