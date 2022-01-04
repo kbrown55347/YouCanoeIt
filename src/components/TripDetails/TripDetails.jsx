@@ -3,9 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 // MUI imports
 import { Button, Grid } from '@mui/material';
+// MUI imports for delete confirmation
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
 
 // import css
 import './TripDetails.css';
+
+// for MUI delete confirmation alert
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
 
 function TripDetails() {
     const dispatch = useDispatch();
@@ -22,6 +34,17 @@ function TripDetails() {
             payload: params.id
         })
     }, []);
+
+    // for MUI delete confirmation alert
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     return (
         <div className="container">
@@ -50,19 +73,41 @@ function TripDetails() {
                 >
                     <Button
                         variant="contained"
-                        style={{ backgroundColor: '#8fa253', color: 'white' }}>
+                        style={{ backgroundColor: '#a1b26a', color: 'white' }}>
                         Edit
                     </Button>
-                    <Button
+
+                    {/* MUI delete confirmation alert */}
+                    <Button 
                         variant="contained"
-                        style={{ backgroundColor: '#8fa253', color: 'white' }}>
+                        style={{ backgroundColor: '#e0857c', color: 'white' }}
+                        onClick={handleClickOpen}>
                         Delete
                     </Button>
+                    <Dialog
+                        open={open}
+                        TransitionComponent={Transition}
+                        keepMounted
+                        onClose={handleClose}
+                        aria-describedby="alert-dialog-slide-description"
+                    >
+                        <DialogTitle>{"Delete this trip?"}</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText id="alert-dialog-slide-description">
+                                Clicking delete will remove this trip from your account.
+                            </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={handleClose}>Nevermind</Button>
+                            <Button onClick={handleClose}>Delete</Button>
+                        </DialogActions>
+                    </Dialog>
+
                 </Grid>
 
             </div>
 
-        </div>
+        </div >
     )
 };
 

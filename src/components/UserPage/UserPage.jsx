@@ -36,7 +36,7 @@ function UserPage() {
         {/* Add Trip button */}
         <Button
           variant="contained"
-          style={{ backgroundColor: '#8fa253', color: 'white' }}
+          style={{ backgroundColor: '#a1b26a', color: 'white' }}
           // send user to add trip page on click of Add Trip button
           onClick={() => {
             history.push('/add');
@@ -60,7 +60,7 @@ function UserPage() {
           <br></br>
           <Button
             variant="contained"
-            style={{ backgroundColor: '#8fa253', color: 'white' }}
+            style={{ backgroundColor: '#a1b26a', color: 'white' }}
             // send user to trip details page on click of View Details button
             onClick={() => {
               history.push(`/trip_details/${trip.id}`);
