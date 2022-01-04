@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-// This route returns logged in users past trips
+// This GET route returns logged in users past trips
 router.get('/', rejectUnauthenticated, (req, res) => {
   // console.log('req.user', req.user);
 
@@ -33,7 +33,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 
-// get past trip details
+// GET past trip details
 router.get('/:id', rejectUnauthenticated, (req, res) => {
   // calling columns individually so I can customize date for start & end dates
   const queryText = `
@@ -60,8 +60,22 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 });
 
 
-
-
+// DELETE trip from database, only if user is logged in and user id matches
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+  const queryText = `
+    DELETE FROM "trips"
+      WHERE "id"=$1 AND "user_id"=$2;
+  `;
+  const queryValues = [req.params.id, req.user.id]
+pool.query(queryText, queryValues)
+  .then((res)=> {
+    res.sendStatus(200)
+  })
+  .catch((err) => {
+    console.error('ERROR: DELETE request failed:', err);
+    res.sendStatus(500)
+  })
+});
 
 
 
