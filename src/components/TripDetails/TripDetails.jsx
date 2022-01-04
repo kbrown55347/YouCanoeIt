@@ -44,6 +44,14 @@ function TripDetails() {
         setOpen(false);
     };
 
+    // on click of delete button in MUI alert, dispatch to saga to delete trip
+    const handleAlertDeleteClick = () => {
+        dispatch({
+            type: 'DELETE_TRIP',
+            payload: params.id
+        })
+    };
+
     return (
         <div className="container">
 
@@ -97,7 +105,7 @@ function TripDetails() {
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={handleClose}>Nevermind</Button>
-                            <Button onClick={handleClose}>Delete</Button>
+                            <Button onClick={handleAlertDeleteClick}>Delete</Button>
                         </DialogActions>
                     </Dialog>
 

@@ -67,13 +67,12 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
       WHERE "id"=$1 AND "user_id"=$2;
   `;
   const queryValues = [req.params.id, req.user.id]
-  console.log(query);
 pool.query(queryText, queryValues)
-  .then((dbRes)=> {
-    dbRes.sendStatus(200)
+  .then((result)=> {
+    res.sendStatus(200)
   })
-  .catch((dbErr) => {
-    console.error('ERROR: DELETE request failed:', dbErr);
+  .catch((err) => {
+    console.error('ERROR: DELETE request failed:', err);
     res.sendStatus(500)
   })
 });
