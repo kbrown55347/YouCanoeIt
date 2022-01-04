@@ -41,7 +41,15 @@ function AddTrip() {
                     label='Trip Name'
                     style={{ width: '90%' }}
                     onChange={(event) => setTripName(event.target.value)} />
-                <br></br>
+            </Grid>
+            <br></br>
+
+            <Grid
+                container
+                direction="row"
+                justifyContent="space-evenly"
+                alignItems="center"
+            >
                 {/* info for start_date */}
                 <TextField
                     variant="standard"
@@ -49,9 +57,8 @@ function AddTrip() {
                     value={startDate}
                     label='Start Date'
                     placeholder='MM/DD/YYYY'
-                    style={{ width: '90%' }}
+                    style={{ width: '43%' }}
                     onChange={(event) => setStartDate(event.target.value)} />
-                <br></br>
                 {/* info for end_date */}
                 <TextField
                     variant="standard"
@@ -59,10 +66,12 @@ function AddTrip() {
                     value={endDate}
                     label='End Date'
                     placeholder='MM/DD/YYYY'
-                    style={{ width: '90%' }}
+                    style={{ width: '43%' }}
                     onChange={(event) => setEndDate(event.target.value)} />
             </Grid>
             <br></br>
+
+
 
             <Grid
                 container
@@ -140,7 +149,28 @@ function AddTrip() {
                 <br></br>
             </Grid>
 
+            <Grid
+                container
+                direction="row"
+                justifyContent="space-evenly"
+                alignItems="center"
+            >
+                <Button
+                    variant="contained"
+                    style={{ backgroundColor: '#a1b26a', color: 'white' }}>
+                    Add Trip
+                </Button>
 
+                <Button
+                    variant="contained"
+                    style={{ backgroundColor: 'white', color: 'black' }}
+                    onClick={() => {
+                        history.push('/user');
+                    }}>
+                    Cancel
+                </Button>
+
+            </Grid>
 
         </div>
     )
