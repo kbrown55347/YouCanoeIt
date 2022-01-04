@@ -68,7 +68,7 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
   `;
   const queryValues = [req.params.id, req.user.id]
 pool.query(queryText, queryValues)
-  .then((result)=> {
+  .then((res)=> {
     res.sendStatus(200)
   })
   .catch((err) => {

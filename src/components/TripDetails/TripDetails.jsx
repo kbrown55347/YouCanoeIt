@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 // MUI imports
 import { Button, Grid } from '@mui/material';
 // MUI imports for delete confirmation
@@ -21,6 +21,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 function TripDetails() {
     const dispatch = useDispatch();
+    const history = useHistory();
     // useParams so detail page is aware of clicked item
     const params = useParams();
     // console.log('******** PARAMS:', params);
@@ -50,6 +51,8 @@ function TripDetails() {
             type: 'DELETE_TRIP',
             payload: params.id
         })
+        // send user to user page after trip is deleted
+        history.push('/user')
     };
 
     return (
