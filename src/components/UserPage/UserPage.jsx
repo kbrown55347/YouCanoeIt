@@ -50,9 +50,7 @@ function UserPage() {
         <div key={trip.id} className="trips_list">
           {trip.trip_name}
           <br></br>
-          {/* using .slice(0,10) to only return dates and get rid
-          of extras */}
-          {trip.start_date.slice(0,10)} to {trip.end_date.slice(0,10)}
+          {trip.start_date} to {trip.end_date}
           <br></br>
           <img
             src={trip.image_url}
