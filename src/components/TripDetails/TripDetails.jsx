@@ -37,11 +37,9 @@ function TripDetails() {
 
     // for MUI delete confirmation alert
     const [open, setOpen] = React.useState(false);
-
     const handleClickOpen = () => {
         setOpen(true);
     };
-
     const handleClose = () => {
         setOpen(false);
     };
