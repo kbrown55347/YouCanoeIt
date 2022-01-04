@@ -1,10 +1,17 @@
 ## To Do:
 
-### Delete Trip
-*trip details page*
-- [x] create delete route in server to delete selected trip from DB
-- [ ] create saga function to send trigger to delete route
-- [ ] send dispatch from trip details page (w/params) to saga function on click of delete button in alert
+### Add Trip
+*add trip page*
+see weekend-movie-sagas repo for example
+- [x] create Add trip component 
+- [x] send user to add trip on click
+- [ ] html layout (MUI buttons & inputs)
+- [ ] setup local state to capture info from inputs
+- [ ] bundle info into object
+- [ ] dispatch object to add movie saga function
+- [ ] setup saga function to axios POST trip to server
+- [ ] setup server route to POST new trip
+
 
 
 
