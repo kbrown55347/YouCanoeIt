@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+// MUI imports
+import { Button, Grid } from '@mui/material';
 
 // import css
 import './TripDetails.css';
@@ -21,10 +23,6 @@ function TripDetails() {
         })
     }, []);
 
-    // const startDate = tripDetails.start_date.slice(0, 10)
-    // const endDate = tripDetails.end_date.slice(0, 10)
-    // console.log('tripDetails reducer:', tripDetails);
-
     return (
         <div className="container">
 
@@ -43,6 +41,24 @@ function TripDetails() {
                 >
                 </img>
                 <p>{tripDetails.image_description}</p>
+
+                <Grid
+                    container
+                    direction="row"
+                    justifyContent="space-evenly"
+                    alignItems="center"
+                >
+                    <Button
+                        variant="contained"
+                        style={{ backgroundColor: '#8fa253', color: 'white' }}>
+                        Edit
+                    </Button>
+                    <Button
+                        variant="contained"
+                        style={{ backgroundColor: '#8fa253', color: 'white' }}>
+                        Delete
+                    </Button>
+                </Grid>
 
             </div>
 
