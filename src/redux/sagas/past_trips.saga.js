@@ -8,7 +8,7 @@ function* fetchPastTrips() {
             method: 'GET',
             url: 'api/past_trips'
         })
-        // console.log('in fetchPastTrips, response.data from DB:', response.data);
+        console.log('in fetchPastTrips, response.data from DB:', response.data);
         // send to past trips reducer
         yield put({
             type: 'SET_PAST_TRIPS',
