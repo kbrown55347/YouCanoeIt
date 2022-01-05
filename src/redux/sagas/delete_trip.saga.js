@@ -6,7 +6,7 @@ function* deleteTrip(action) {
     try {
         const response = yield axios({
             method: 'DELETE',
-            url: `api/past_trips/${action.payload}`
+            url: `api/trips/${action.payload}`
         });
         console.log('in fetchTripDetails, response.data from DB:', response.data);
     } catch (err) {

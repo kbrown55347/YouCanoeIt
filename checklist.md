@@ -8,7 +8,7 @@ see weekend-movie-sagas repo for example
 - [x] html layout (MUI buttons & inputs)
 - [x] setup local state to capture info from inputs
 - [x] bundle info into object
-- [ ] dispatch object to add movie saga function
+- [x] dispatch object to add trip saga function
 - [ ] setup saga function to axios POST trip to server
 - [ ] setup server route to POST new trip
 

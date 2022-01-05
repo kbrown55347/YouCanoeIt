@@ -6,7 +6,7 @@ function* fetchPastTrips() {
     try {
         const response = yield axios({
             method: 'GET',
-            url: 'api/past_trips'
+            url: 'api/trips'
         })
         console.log('in fetchPastTrips, response.data from DB:', response.data);
         // send to past trips reducer

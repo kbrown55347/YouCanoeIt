@@ -3,16 +3,16 @@ import axios from 'axios';
 
 // Saga function to POST new trip to db
 function* addNewTrip(action) {
-    // try {
-    //     const response = yield axios({
-    //         method: 'POST',
-    //         url: 'api/past_trips'
-    //     })
-        console.log('in addNewTrip', action.payload);
+    try {
+        const response = yield axios({
+            method: 'POST',
+            url: 'api/trips'
+        })
+        // console.log('in addNewTrip', action.payload);
 
-    // } catch (err) {
-    //     console.error('addNewTrip error', err);
-    // }
+    } catch (err) {
+        console.error('addNewTrip error', err);
+    }
 }; // end addNewTrip
 
 // Saga function to intercept dispatches

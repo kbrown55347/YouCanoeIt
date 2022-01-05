@@ -43,12 +43,12 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     "entry_point", "exit_point", "longest_portage", 
     "lakes", "comments", "image_url"
       FROM "trips"
-        WHERE "id"=$1;
+        WHERE "id"=$1 AND "user_id"=$2;
   `
-  const queryValue = [req.params.id];
+  const queryValues = [req.params.id, req.user.id];
   // console.log('in details get route', queryValue)
 
-  pool.query(queryText, queryValue)
+  pool.query(queryText, queryValues)
   .then((dbRes) => {
     // console.log('In get past trip details', dbRes.rows[0])
     res.send(dbRes.rows[0]);
@@ -66,7 +66,7 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
     DELETE FROM "trips"
       WHERE "id"=$1 AND "user_id"=$2;
   `;
-  const queryValues = [req.params.id, req.user.id]
+  const queryValues = [req.params.id, req.user.id];
 pool.query(queryText, queryValues)
   .then((res)=> {
     res.sendStatus(200)
@@ -76,7 +76,6 @@ pool.query(queryText, queryValues)
     res.sendStatus(500)
   })
 });
-
 
 
 /**
