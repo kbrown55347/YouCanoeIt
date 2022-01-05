@@ -90,7 +90,7 @@ function App() {
           <ProtectedRoute
             // logged in shows EditTrip else shows LoginPage
             exact
-            path="/edit_trip"
+            path="/edit_trip/:id"
           >
             <EditTrip />
           </ProtectedRoute>

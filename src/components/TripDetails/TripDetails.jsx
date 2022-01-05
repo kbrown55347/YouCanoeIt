@@ -94,7 +94,7 @@ function TripDetails() {
                         style={{ backgroundColor: '#a1b26a', color: 'white' }}
                         // send user to edit trip page on click
                         onClick={() => {
-                            history.push('/edit_trip');
+                            history.push(`/edit_trip/${tripDetails.id}`);
                         }}>
                         Edit
                     </Button>
