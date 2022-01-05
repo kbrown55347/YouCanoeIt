@@ -6,7 +6,8 @@ function* addNewTrip(action) {
     try {
         const response = yield axios({
             method: 'POST',
-            url: 'api/trips'
+            url: 'api/trips/add',
+            data: action.payload
         })
         // console.log('in addNewTrip', action.payload);
 

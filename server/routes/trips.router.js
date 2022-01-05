@@ -33,7 +33,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 
-// GET past trip details
+// GET past trip details for logged in user
 router.get('/:id', rejectUnauthenticated, (req, res) => {
   // calling columns individually so I can customize date for start & end dates
   const queryText = `
@@ -78,11 +78,9 @@ pool.query(queryText, queryValues)
 });
 
 
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
-  // POST route code here
+// POST route to add new trip to db
+router.post('/add', rejectUnauthenticated, (req, res) => {
+  console.log('in trips/add POST', req.body);
 });
 
 module.exports = router;
