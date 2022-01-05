@@ -8,10 +8,10 @@ function EditTrip() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    // /* access trip details reducer of trip that was previously
-    // clicked on to view details */
-    // const tripDetails = useSelector(store => store.tripDetails);
-    // console.log(tripDetails);
+    /* access trip details reducer of trip that was previously
+    clicked on to view details */
+    const tripDetails = useSelector(store => store.tripDetails);
+    console.log('in EditTrip', tripDetails);
 
     const params = useParams();
 
@@ -43,7 +43,7 @@ function EditTrip() {
     useEffect(() => {
         // get trip details
         dispatch({
-            type: 'FETCH_TRIP_TO_EDIT',
+            type: 'FETCH_TRIP_DETAILS',
             payload: params.id
         })
     }, []);
