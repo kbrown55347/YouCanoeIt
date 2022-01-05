@@ -25,18 +25,28 @@ function AddTrip() {
     // handle click of add trip button
     const handleAddTripClick = () => {
         // bundle new trip into object
-        const newTripInfo = { tripName, startDate, endDate,
+        const newTripInfo = {
+            tripName, startDate, endDate,
             entryPoint, exitPoint, longestPortage,
             lakes, tripComments, imagePath,
             imageDescription
         }
-        // dispatch object
-        dispatch({
-            type: 'ADD_NEW_TRIP',
-            payload: newTripInfo 
-        });
-        // send user to user page
-        history.push('/user');
+
+        // check if fields are filled in
+        if (tripName === '' || startDate === '' || endDate === '' ||
+            entryPoint === '' || exitPoint === '' || longestPortage === '' ||
+            lakes === '' || tripComments === '' || imagePath === '' ||
+            imageDescription === '') {
+            alert('Please fill out all information fields to add trip.');
+        } else {
+            // dispatch object
+            dispatch({
+                type: 'ADD_NEW_TRIP',
+                payload: newTripInfo
+            })
+            // send user to user page
+            history.push('/user');
+        };
     }; // end handleAddTripClick
 
     return (
