@@ -10,7 +10,7 @@ function AddTrip() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    // local states for db trip info
+    // local states to collect trip info
     let [tripName, setTripName] = useState('');
     let [startDate, setStartDate] = useState('');
     let [endDate, setEndDate] = useState('');
@@ -30,10 +30,14 @@ function AddTrip() {
             lakes, tripComments, imagePath,
             imageDescription
         }
-        console.log(newTripInfo);
         // dispatch object
-
-    }
+        dispatch({
+            type: 'ADD_NEW_TRIP',
+            payload: newTripInfo 
+        });
+        // send user to user page
+        history.push('/user');
+    }; // end handleAddTripClick
 
     return (
         <div className="container">
