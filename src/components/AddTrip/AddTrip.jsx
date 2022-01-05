@@ -22,7 +22,18 @@ function AddTrip() {
     let [imagePath, setImagePath] = useState('');
     let [imageDescription, setImageDescription] = useState('');
 
-    console.log(imageDescription);
+    // handle click of add trip button
+    const handleAddTripClick = () => {
+        // bundle new trip into object
+        const newTripInfo = { tripName, startDate, endDate,
+            entryPoint, exitPoint, longestPortage,
+            lakes, tripComments, imagePath,
+            imageDescription
+        }
+        console.log(newTripInfo);
+        // dispatch object
+
+    }
 
     return (
         <div className="container">
@@ -157,13 +168,15 @@ function AddTrip() {
             >
                 <Button
                     variant="contained"
-                    style={{ backgroundColor: '#a1b26a', color: 'white' }}>
+                    style={{ backgroundColor: '#a1b26a', color: 'white' }}
+                    onClick={handleAddTripClick}>
                     Add Trip
                 </Button>
 
                 <Button
                     variant="contained"
                     style={{ backgroundColor: 'white', color: 'black' }}
+                    // send user back to user page on click
                     onClick={() => {
                         history.push('/user');
                     }}>
@@ -174,6 +187,6 @@ function AddTrip() {
 
         </div>
     )
-}; // end Add Trip
+}; // end AddTrip
 
 export default AddTrip;
