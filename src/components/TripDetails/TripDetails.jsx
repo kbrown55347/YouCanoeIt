@@ -82,12 +82,20 @@ function TripDetails() {
                 >
                     <Button
                         variant="contained"
+                        style={{ backgroundColor: 'white', color: 'black' }}
+                        onClick={() => {
+                            history.push('/user');
+                        }}>
+                        Back
+                    </Button>
+                    <Button
+                        variant="contained"
                         style={{ backgroundColor: '#a1b26a', color: 'white' }}>
                         Edit
                     </Button>
 
                     {/* MUI delete confirmation alert */}
-                    <Button 
+                    <Button
                         variant="contained"
                         style={{ backgroundColor: '#e0857c', color: 'white' }}
                         onClick={handleClickOpen}>
