@@ -1,0 +1,7 @@
+.trip_list_item {
+    padding: 0.5em;
+}
+
+.trip_list_item, img {
+    padding: 0 0 1em 0;
+}
