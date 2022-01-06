@@ -29,12 +29,26 @@ function EditTrip() {
             type: 'EDIT_TRIP_NAME',
             payload: event.target.value
         });
-        // console.log(event.target.value);
-    }
+    };
+
+    // handle start date change
+    const handleStartDateChange = (event) => {
+        dispatch({
+            type: 'EDIT_START_DATE',
+            payload: event.target.value
+        });
+    };
+
+    // handle end date change
+    const handleEndDateChange = (event) => {
+        dispatch({
+            type: 'EDIT_END_DATE',
+            payload: event.target.value
+        });
+    };
 
     // local states to collect trip info
     // set initial value of state to equal info from tripDetails reducer
-    // let [tripName, setTripName] = useState(tripDetails.trip_name);
     // let [startDate, setStartDate] = useState(tripDetails.start_date);
     // let [endDate, setEndDate] = useState(tripDetails.end_date);
     // let [entryPoint, setEntryPoint] = useState(tripDetails.entry_point);
@@ -61,13 +75,13 @@ function EditTrip() {
     //     };
     //     console.log('tripEdits object', tripEdits);
 
-        // dispatch object to saga function
-        // dispatch({
-        //     type: 'SEND_TRIP_EDITS',
-        //     payload: tripEdits
-        // });
+    // dispatch object to saga function
+    // dispatch({
+    //     type: 'SEND_TRIP_EDITS',
+    //     payload: tripEdits
+    // });
 
-        // send user to user page
+    // send user to user page
     //     history.push('/user');
     // };
 
@@ -93,32 +107,34 @@ function EditTrip() {
             </Grid>
             <br></br>
 
-            {/* <Grid
+            <Grid
                 container
                 direction="row"
                 justifyContent="space-evenly"
                 alignItems="center"
-            > */}
+            >
                 {/* info for start_date */}
-                {/* <TextField
+                <TextField
                     variant="standard"
                     type='text'
-                    value={startDate}
+                    value={tripDetails.start_date || ''}
                     label='Start Date'
                     placeholder='MM/DD/YYYY'
                     style={{ width: '43%' }}
-                    onChange={(event) => setStartDate(event.target.value)} /> */}
+                    onChange={handleStartDateChange}
+                />
                 {/* info for end_date */}
-                {/* <TextField
+                <TextField
                     variant="standard"
                     type='text'
-                    value={endDate}
+                    value={tripDetails.end_date || ''}
                     label='End Date'
                     placeholder='MM/DD/YYYY'
                     style={{ width: '43%' }}
-                    onChange={(event) => setEndDate(event.target.value)} />
+                onChange={handleEndDateChange} 
+                />
             </Grid>
-            <br></br> */}
+            <br></br>
 
             {/* <Grid
                 container
@@ -126,16 +142,16 @@ function EditTrip() {
                 justifyContent="space-evenly"
                 alignItems="center"
             > */}
-                {/* info for entry_point */}
-                {/* <TextField
+            {/* info for entry_point */}
+            {/* <TextField
                     variant="standard"
                     type='text'
                     value={entryPoint}
                     label='Entry Point'
                     style={{ width: '43%' }}
                     onChange={(event) => setEntryPoint(event.target.value)} /> */}
-                {/* info for exit_point */}
-                {/* <TextField
+            {/* info for exit_point */}
+            {/* <TextField
                     variant="standard"
                     type='text'
                     value={exitPoint}
@@ -150,8 +166,8 @@ function EditTrip() {
                 direction="column"
                 alignItems="center"
             > */}
-                {/* info for longest_portage */}
-                {/* <TextField
+            {/* info for longest_portage */}
+            {/* <TextField
                     variant="standard"
                     type='text'
                     value={longestPortage}
@@ -159,8 +175,8 @@ function EditTrip() {
                     style={{ width: '90%' }}
                     onChange={(event) => setLongestPortage(event.target.value)} />
                 <br></br> */}
-                {/* info for lakes */}
-                {/* <TextField
+            {/* info for lakes */}
+            {/* <TextField
                     variant="standard"
                     type='text' multiline rows={2}
                     value={lakes}
@@ -168,8 +184,8 @@ function EditTrip() {
                     style={{ width: '90%' }}
                     onChange={(event) => setLakes(event.target.value)} />
                 <br></br> */}
-                {/* info for comments */}
-                {/* <TextField
+            {/* info for comments */}
+            {/* <TextField
                     variant="standard"
                     type='text' multiline rows={2}
                     value={tripComments}
@@ -177,16 +193,16 @@ function EditTrip() {
                     style={{ width: '90%' }}
                     onChange={(event) => setTripComments(event.target.value)} />
                 <br></br> */}
-                {/* info for image_url */}
-                {/* <TextField
+            {/* info for image_url */}
+            {/* <TextField
                     variant="standard"
                     value={imagePath}
                     label='Image URL'
                     style={{ width: '90%' }}
                     onChange={(event) => setImagePath(event.target.value)} />
                 <br></br> */}
-                {/* info for image_description */}
-                {/* <TextField
+            {/* info for image_description */}
+            {/* <TextField
                     variant="standard"
                     type='text' multiline rows={2}
                     value={imageDescription}
