@@ -19,12 +19,18 @@ function EditTrip() {
 
     /* access trip details reducer */
     const tripDetails = useSelector(store => store.tripDetails);
-    // console.log('in EditTrip', tripDetails);
+    console.log('in EditTrip', tripDetails);
 
     const params = useParams();
 
     // handle trip name change
-    const 
+    const handleTripNameChange = (event) => {
+        dispatch({
+            type: 'EDIT_TRIP_NAME',
+            payload: event.target.value
+        });
+        // console.log(event.target.value);
+    }
 
     // local states to collect trip info
     // set initial value of state to equal info from tripDetails reducer
@@ -82,7 +88,7 @@ function EditTrip() {
                     value={tripDetails.trip_name || ''}
                     label='Trip Name'
                     style={{ width: '90%' }}
-                    // onChange={(event) => setTripName(event.target.value)} 
+                    onChange={handleTripNameChange}
                 />
             </Grid>
             <br></br>
