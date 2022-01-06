@@ -183,14 +183,15 @@ function EditTrip() {
                 justifyContent="space-evenly"
                 alignItems="center"
             >
-                {/* <Button
+                <Button
                     variant="contained"
                     style={{ backgroundColor: '#a1b26a', color: 'white' }}
-                    onClick={handleAddTripClick}>
-                    Add Trip
-                </Button> */}
+                    // onClick={handleAddTripClick}
+                    >
+                    Save
+                </Button>
 
-                {/* <Button
+                <Button
                     variant="contained"
                     style={{ backgroundColor: 'white', color: 'black' }}
                     // send user back to user page on click
@@ -198,7 +199,7 @@ function EditTrip() {
                         history.push('/user');
                     }}>
                     Cancel
-                </Button> */}
+                </Button>
 
             </Grid>
 
