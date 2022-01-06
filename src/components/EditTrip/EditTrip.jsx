@@ -63,6 +63,46 @@ function EditTrip() {
         });
     };
 
+    // handle longest portage change
+    const handleLongestPortageChange = (event) => {
+        dispatch({
+            type: 'EDIT_LONGEST_PORTAGE',
+            payload: event.target.value
+        });
+    };
+
+    // handle lakes change
+    const handleLakesChange = (event) => {
+        dispatch({
+            type: 'EDIT_LAKES',
+            payload: event.target.value
+        });
+    };
+
+    // handle comments change
+    const handleCommentsChange = (event) => {
+        dispatch({
+            type: 'EDIT_COMMENTS',
+            payload: event.target.value
+        });
+    };
+
+    // handle image url change
+    const handleImageUrlChange = (event) => {
+        dispatch({
+            type: 'EDIT_IMAGE_URL',
+            payload: event.target.value
+        });
+    };
+
+    // handle image description change
+    const handleImageDescriptionChange = (event) => {
+        dispatch({
+            type: 'EDIT_IMAGE_DESCRIPTION',
+            payload: event.target.value
+        });
+    };
+
     // local states to collect trip info
     // set initial value of state to equal info from tripDetails reducer
     // let [startDate, setStartDate] = useState(tripDetails.start_date);
@@ -179,56 +219,61 @@ function EditTrip() {
             </Grid>
             <br></br>
 
-            {/* <Grid
+            <Grid
                 container
                 direction="column"
                 alignItems="center"
-            > */}
-            {/* info for longest_portage */}
-            {/* <TextField
+            >
+                {/* info for longest_portage */}
+                <TextField
                     variant="standard"
                     type='text'
-                    value={longestPortage}
+                    value={tripDetails.longest_portage || ''}
                     label='Longest Portage'
                     style={{ width: '90%' }}
-                    onChange={(event) => setLongestPortage(event.target.value)} />
-                <br></br> */}
-            {/* info for lakes */}
-            {/* <TextField
+                    onChange={handleLongestPortageChange}
+                />
+                <br></br>
+                {/* info for lakes */}
+                <TextField
                     variant="standard"
                     type='text' multiline rows={2}
-                    value={lakes}
+                    value={tripDetails.lakes || ''}
                     label='Lakes Traveled'
                     style={{ width: '90%' }}
-                    onChange={(event) => setLakes(event.target.value)} />
-                <br></br> */}
-            {/* info for comments */}
-            {/* <TextField
+                    onChange={handleLakesChange}
+                />
+                <br></br>
+                {/* info for comments */}
+                <TextField
                     variant="standard"
                     type='text' multiline rows={2}
-                    value={tripComments}
+                    value={tripDetails.comments || ''}
                     label='Trip Comments'
                     style={{ width: '90%' }}
-                    onChange={(event) => setTripComments(event.target.value)} />
-                <br></br> */}
-            {/* info for image_url */}
-            {/* <TextField
+                    onChange={handleCommentsChange}
+                />
+                <br></br>
+                {/* info for image_url */}
+                <TextField
                     variant="standard"
-                    value={imagePath}
+                    value={tripDetails.image_url || ''}
                     label='Image URL'
                     style={{ width: '90%' }}
-                    onChange={(event) => setImagePath(event.target.value)} />
-                <br></br> */}
-            {/* info for image_description */}
-            {/* <TextField
+                    onChange={handleImageUrlChange}
+                />
+                <br></br>
+                {/* info for image_description */}
+                <TextField
                     variant="standard"
                     type='text' multiline rows={2}
-                    value={imageDescription}
+                    value={tripDetails.image_description || ''}
                     label='Image Description'
                     style={{ width: '90%' }}
-                    onChange={(event) => setImageDescription(event.target.value)} />
+                    onChange={handleImageDescriptionChange} 
+                />
                 <br></br>
-            </Grid> */}
+            </Grid>
 
             {/* <Grid
                 container

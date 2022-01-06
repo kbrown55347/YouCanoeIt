@@ -14,6 +14,16 @@ const tripDetails = (state = [], action) => {
             return { ...state, entry_point: action.payload };
         case 'EDIT_EXIT_POINT':
             return { ...state, exit_point: action.payload };
+        case 'EDIT_LONGEST_PORTAGE':
+            return { ...state, longest_portage: action.payload };
+        case 'EDIT_LAKES':
+            return { ...state, lakes: action.payload };
+        case 'EDIT_COMMENTS':
+            return { ...state, comments: action.payload };
+        case 'EDIT_IMAGE_URL':
+            return { ...state, image_url: action.payload };
+        case 'EDIT_IMAGE_DESCRIPTION':
+            return { ...state, image_description: action.payload };
         default:
             return state;
     }
