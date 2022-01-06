@@ -4,14 +4,17 @@ import axios from 'axios';
 // Saga function to send edited trip info
 function* sendEditedTripInfo(action) {
     try {
-        console.log('action.payload.tripId:', action.payload.tripId);
-        console.log('action.payload:', action.payload);
+        // console.log('action.payload.tripId:', action.payload.tripId);
+        // console.log('action.payload:', action.payload);
+
         // axios PUT route, send info to DB
-        // const response = yield axios({
-        //     method: 'PUT',
-        //     url: `api/trips/${action.payload}`
-        // });
-        // console.log('in sendEditedTripInfo, response.data:', response.data);
+        const response = yield axios({
+            method: 'PUT',
+            url: `api/trips/${action.payload.tripId}`,
+            // send trip edits object
+            data: action.payload
+        });
+        console.log('in sendEditedTripInfo, response.data:', response.data);
     } catch (err) {
         console.error('sendEditedTripInfo error', err);
     };

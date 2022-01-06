@@ -108,4 +108,24 @@ router.post('/add', rejectUnauthenticated, (req, res) => {
 
 });
 
+/* PUT route to update trip in DB with edited info, only if 
+  user is logged in and user id matches */
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+  res.sendStatus(201);
+  // const queryText = `
+
+  // `;
+  // const queryValues = [req.params.id, req.user.id];
+// pool.query(queryText, queryValues)
+//   .then((dbRes)=> {
+//     // send back success
+//     res.sendStatus(201);
+//   })
+//   .catch((dbErr) => {
+//     console.error('ERROR: PUT request failed:', dbErr);
+//     res.sendStatus(500);
+//   });
+});
+
+
 module.exports = router;

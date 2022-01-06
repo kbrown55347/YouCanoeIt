@@ -9,8 +9,8 @@
 - [x] setup local state w/ start values equal to trip to edit reducer
 - [x] Save Changes & Cancel buttons, wire cancel click route to user page
 - [x] bundle local state into object (like add page)
-- [ ] create saga function w/ axios PUT route
-- [ ] dispatch local state to saga function w/ PUT route
+- [x] create saga function w/ axios PUT route
+- [x] dispatch object w/local state to saga function w/ PUT route
 - [ ] setup PUT route in server to update item
 
 
