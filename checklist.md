@@ -7,8 +7,8 @@
 *edit trip page*
 - [x] setup useEffect to fire dispatch to trip details saga function to fetch trip details (w/payload of params.id)
 - [x] setup local state w/ start values equal to trip to edit reducer
-- [ ] Save Changes & Cancel buttons w/ on click routes
-- [ ] bundle local state into object (like add page)
+- [x] Save Changes & Cancel buttons, wire cancel click route to user page
+- [x] bundle local state into object (like add page)
 - [ ] create saga function w/ axios PUT route
 - [ ] dispatch local state to saga function w/ PUT route
 - [ ] setup PUT route in server to update item

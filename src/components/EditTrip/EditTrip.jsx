@@ -19,7 +19,7 @@ function EditTrip() {
 
     /* access trip details reducer */
     const tripDetails = useSelector(store => store.tripDetails);
-    console.log('in EditTrip', tripDetails);
+    // console.log('in EditTrip', tripDetails);
 
     const params = useParams();
 
@@ -41,15 +41,17 @@ function EditTrip() {
     // console.log('tripName', tripName);
     // console.log('startDate', startDate);
 
-    // // bundle trip edits into object
-    // const tripEdits = {
-    //     tripId, tripName, startDate, endDate,
-    //     entryPoint, exitPoint, longestPortage,
-    //     lakes, tripComments, imagePath,
-    //     imageDescription
-    // };
-    // console.log('tripEdits object', tripEdits);
-
+    // handle click of save button
+    const handleSaveClick = () => {
+        // bundle trip edits into object
+        const tripEdits = {
+            tripId, tripName, startDate, endDate,
+            entryPoint, exitPoint, longestPortage,
+            lakes, tripComments, imagePath,
+            imageDescription
+        };
+        console.log('tripEdits object', tripEdits);
+    };
 
     return (
         <div className="container">
@@ -98,8 +100,6 @@ function EditTrip() {
                     onChange={(event) => setEndDate(event.target.value)} />
             </Grid>
             <br></br>
-
-
 
             <Grid
                 container
@@ -186,8 +186,8 @@ function EditTrip() {
                 <Button
                     variant="contained"
                     style={{ backgroundColor: '#a1b26a', color: 'white' }}
-                    // onClick={handleAddTripClick}
-                    >
+                    onClick={handleSaveClick}
+                >
                     Save
                 </Button>
 
