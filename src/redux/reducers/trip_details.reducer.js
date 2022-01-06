@@ -10,6 +10,10 @@ const tripDetails = (state = [], action) => {
             return { ...state, start_date: action.payload };
         case 'EDIT_END_DATE':
             return { ...state, end_date: action.payload };
+        case 'EDIT_ENTRY_POINT':
+            return { ...state, entry_point: action.payload };
+        case 'EDIT_EXIT_POINT':
+            return { ...state, exit_point: action.payload };
         default:
             return state;
     }

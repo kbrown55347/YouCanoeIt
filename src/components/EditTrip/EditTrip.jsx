@@ -47,6 +47,22 @@ function EditTrip() {
         });
     };
 
+    // handle entry point change
+    const handleEntryPointChange = (event) => {
+        dispatch({
+            type: 'EDIT_ENTRY_POINT',
+            payload: event.target.value
+        });
+    };
+
+    // handle exit point change
+    const handleExitPointChange = (event) => {
+        dispatch({
+            type: 'EDIT_EXIT_POINT',
+            payload: event.target.value
+        });
+    };
+
     // local states to collect trip info
     // set initial value of state to equal info from tripDetails reducer
     // let [startDate, setStartDate] = useState(tripDetails.start_date);
@@ -131,35 +147,37 @@ function EditTrip() {
                     label='End Date'
                     placeholder='MM/DD/YYYY'
                     style={{ width: '43%' }}
-                onChange={handleEndDateChange} 
+                    onChange={handleEndDateChange}
                 />
             </Grid>
             <br></br>
 
-            {/* <Grid
+            <Grid
                 container
                 direction="row"
                 justifyContent="space-evenly"
                 alignItems="center"
-            > */}
-            {/* info for entry_point */}
-            {/* <TextField
+            >
+                {/* info for entry_point */}
+                <TextField
                     variant="standard"
                     type='text'
-                    value={entryPoint}
+                    value={tripDetails.entry_point || ''}
                     label='Entry Point'
                     style={{ width: '43%' }}
-                    onChange={(event) => setEntryPoint(event.target.value)} /> */}
-            {/* info for exit_point */}
-            {/* <TextField
+                    onChange={handleEntryPointChange}
+                />
+                {/* info for exit_point */}
+                <TextField
                     variant="standard"
                     type='text'
-                    value={exitPoint}
+                    value={tripDetails.exit_point || ''}
                     label='Exit Point'
                     style={{ width: '43%' }}
-                    onChange={(event) => setExitPoint(event.target.value)} />
+                    onChange={handleExitPointChange}
+                />
             </Grid>
-            <br></br> */}
+            <br></br>
 
             {/* <Grid
                 container
