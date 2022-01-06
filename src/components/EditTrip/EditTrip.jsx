@@ -51,6 +51,8 @@ function EditTrip() {
             imageDescription
         };
         console.log('tripEdits object', tripEdits);
+
+        // dispatch object to saga function
     };
 
     return (
