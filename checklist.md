@@ -11,7 +11,7 @@
 - [x] bundle local state into object (like add page)
 - [x] create saga function w/ axios PUT route
 - [x] dispatch object w/local state to saga function w/ PUT route
-- [ ] setup PUT route in server to update item
+- [x] setup PUT route in server to update item
 
 
 

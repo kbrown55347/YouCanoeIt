@@ -13,12 +13,12 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   // get past trip info from database, but only for column names listed
   // using TO_CHAR for start and end dates to format dates as MM-DD-YYYY w/out timestamp
   queryText = `
-      SELECT "id", "trip_name", 
+    SELECT "id", "trip_name", 
       TO_CHAR("start_date",'MM-DD-YYYY') AS "start_date", 
       TO_CHAR("end_date",'MM-DD-YYYY') AS "end_date", 
       "image_url", "user_id" FROM "trips"
-        WHERE "user_id"=$1
-          ORDER BY "start_date" DESC;
+    WHERE "user_id"=$1
+    ORDER BY "start_date" DESC;
     `;
   queryValues = [req.user.id]
 
@@ -37,13 +37,13 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.get('/:id', rejectUnauthenticated, (req, res) => {
   // calling columns individually so I can customize date for start & end dates
   const queryText = `
-  SELECT "id", "trip_name", 
-    TO_CHAR("start_date",'MM-DD-YYYY') AS "start_date", 
-    TO_CHAR("end_date",'MM-DD-YYYY') AS "end_date", 
-    "entry_point", "exit_point", "longest_portage", 
-    "lakes", "comments", "image_url", "image_description"
-      FROM "trips"
-        WHERE "id"=$1 AND "user_id"=$2;
+    SELECT "id", "trip_name", 
+      TO_CHAR("start_date",'MM-DD-YYYY') AS "start_date", 
+      TO_CHAR("end_date",'MM-DD-YYYY') AS "end_date", 
+      "entry_point", "exit_point", "longest_portage", 
+      "lakes", "comments", "image_url", "image_description"
+    FROM "trips"
+    WHERE "id"=$1 AND "user_id"=$2;
   `
   const queryValues = [req.params.id, req.user.id];
   // console.log('in details get route', queryValue)
@@ -64,7 +64,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
   const queryText = `
     DELETE FROM "trips"
-      WHERE "id"=$1 AND "user_id"=$2;
+    WHERE "id"=$1 AND "user_id"=$2;
   `;
   const queryValues = [req.params.id, req.user.id];
 pool.query(queryText, queryValues)
@@ -111,7 +111,7 @@ router.post('/add', rejectUnauthenticated, (req, res) => {
 /* PUT route to update trip in DB with edited info, only if 
   user is logged in and user id matches */
 router.put('/:id', rejectUnauthenticated, (req, res) => {
-  res.sendStatus(201);
+
   const queryText = `
     UPDATE "trips"
     SET "trip_name"=$1, "start_date"=$2, "end_date"=$3, 
@@ -120,17 +120,23 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
       "image_url"=$9, "image_description"=$10
     WHERE "id"=$11 AND "user_id"=$12;
   `;
-  // const queryValues = [req.params.id, req.user.id];
-  
-// pool.query(queryText, queryValues)
-//   .then((dbRes)=> {
-//     // send back success
-//     res.sendStatus(201);
-//   })
-//   .catch((dbErr) => {
-//     console.error('ERROR: PUT request failed:', dbErr);
-//     res.sendStatus(500);
-//   });
+
+  const queryValues = [
+    req.body.tripName, req.body.startDate, req.body.endDate,
+    req.body.entryPoint, req.body.exitPoint, req.body.longestPortage,
+    req.body.lakes, req.body.tripComments, req.body.imagePath,
+    req.body.imageDescription, req.body.tripId, req.user.id
+  ];
+
+pool.query(queryText, queryValues)
+  .then((dbRes)=> {
+    // send back success
+    res.sendStatus(201);
+  })
+  .catch((dbErr) => {
+    console.error('ERROR: PUT request failed:', dbErr);
+    res.sendStatus(500);
+  });
 });
 
 

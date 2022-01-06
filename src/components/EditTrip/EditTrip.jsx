@@ -57,6 +57,9 @@ function EditTrip() {
             type: 'SEND_TRIP_EDITS',
             payload: tripEdits
         });
+
+        // send user to user page
+        history.push('/user');
     };
 
     return (
