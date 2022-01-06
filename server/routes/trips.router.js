@@ -112,10 +112,16 @@ router.post('/add', rejectUnauthenticated, (req, res) => {
   user is logged in and user id matches */
 router.put('/:id', rejectUnauthenticated, (req, res) => {
   res.sendStatus(201);
-  // const queryText = `
-
-  // `;
+  const queryText = `
+    UPDATE "trips"
+    SET "trip_name"=$1, "start_date"=$2, "end_date"=$3, 
+      "entry_point"=$4, "exit_point"=$5, "longest_portage"=$6, 
+      "lakes"=$7, "comments"=$8,
+      "image_url"=$9, "image_description"=$10
+    WHERE "id"=$11 AND "user_id"=$12;
+  `;
   // const queryValues = [req.params.id, req.user.id];
+  
 // pool.query(queryText, queryValues)
 //   .then((dbRes)=> {
 //     // send back success
