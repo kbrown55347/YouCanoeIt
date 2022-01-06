@@ -19,7 +19,7 @@ function* sendEditedTripInfo(action) {
 
 // Saga function to intercept dispatches
 function* sendEditedTripSaga() {
-    yield takeEvery('SEND_EDITED_TRIP_INFO', sendEditedTripInfo);
+    yield takeEvery('SEND_TRIP_EDITS', sendEditedTripInfo);
 };
 
 export default sendEditedTripSaga;

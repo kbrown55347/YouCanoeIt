@@ -53,6 +53,10 @@ function EditTrip() {
         console.log('tripEdits object', tripEdits);
 
         // dispatch object to saga function
+        dispatch({
+            type: 'SEND_TRIP_EDITS',
+            payload: tripEdits
+        });
     };
 
     return (
