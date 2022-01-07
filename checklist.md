@@ -15,8 +15,7 @@
     - [x] clear reducer on click of back, edit(?) and delete buttons
 
 ### Future To Do's
-- [x] Add user confirmation alert on add trip and delete trip(?) components
-- Move individual trips to own component
+- [x] Move individual trips to own component
 - Trip details page layout (checkout responsive pricing table layouts)
 - Only allow user to add trip if date is in certain format on add trip page
 - on edit trip page, input values stay populated with trip details on page refresh
