@@ -10,6 +10,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
+// sweetalert imports
+import swal from '@sweetalert/with-react';
 
 // import css
 import './TripDetails.css';
@@ -45,12 +47,42 @@ function TripDetails() {
         setOpen(false);
     };
 
-    // on click of delete button in MUI alert, dispatch to saga to delete trip
+    // handle click of back button
+    const handleBackClick = () => {
+        // clear reducer
+        dispatch({
+            type: 'CLEAR_TRIP_DETAILS'
+        });
+        // send user to user page
+        history.push('/user');
+    };
+
+    // handle click of edit button
+    const handleEditClick = () => {
+        // clear reducer
+        dispatch({
+            type: 'CLEAR_TRIP_DETAILS'
+        });
+        // send user to edit trip page with id
+        history.push(`/edit_trip/${tripDetails.id}`);
+    };
+
+    // on click of delete button in MUI alert
     const handleAlertDeleteClick = () => {
+        // dispatch to saga to delete trip
         dispatch({
             type: 'DELETE_TRIP',
             payload: params.id
         })
+        // trip deleted confirmation alert
+        swal({
+            text: "This trip has been removed from your account.",
+            icon: "success",
+        });
+        // clear reducer
+        dispatch({
+            type: 'CLEAR_TRIP_DETAILS'
+        });
         // send user to user page after trip is deleted
         history.push('/user')
     };
@@ -83,23 +115,19 @@ function TripDetails() {
                     <Button
                         variant="contained"
                         style={{ backgroundColor: 'white', color: 'black' }}
-                        // send user to user page on click
-                        onClick={() => {
-                            history.push('/user');
-                        }}>
+                        onClick={handleBackClick}
+                    >
                         Back
                     </Button>
                     <Button
                         variant="contained"
                         style={{ backgroundColor: '#a1b26a', color: 'white' }}
-                        // send user to edit trip page on click
-                        onClick={() => {
-                            history.push(`/edit_trip/${tripDetails.id}`);
-                        }}>
+                        onClick={handleEditClick}
+                    >
                         Edit
                     </Button>
 
-                    {/* MUI delete confirmation alert */}
+                    {/* delete button and MUI delete confirmation alert */}
                     <Button
                         variant="contained"
                         style={{ backgroundColor: '#e0857c', color: 'white' }}

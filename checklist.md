@@ -12,10 +12,10 @@
     - [x] send user to user page
 
 - In trip details page view
-    - [ ] clear reducer on click of back, edit(?) and delete buttons
+    - [x] clear reducer on click of back, edit(?) and delete buttons
 
 ### Future To Do's
-- Add user confirmation alert on add trip and delete trip(?) components
+- [x] Add user confirmation alert on add trip and delete trip(?) components
 - Move individual trips to own component
 - Trip details page layout (checkout responsive pricing table layouts)
 - Only allow user to add trip if date is in certain format on add trip page

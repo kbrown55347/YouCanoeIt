@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 // MUI imports
 import { Button, TextField, Grid } from '@mui/material';
+// sweetalert imports
+import swal from '@sweetalert/with-react';
 
 
 function AddTrip() {
@@ -30,8 +32,7 @@ function AddTrip() {
             entryPoint, exitPoint, longestPortage,
             lakes, tripComments, imagePath,
             imageDescription
-        }
-
+        };
         // check if fields are filled in
         if (tripName === '' || startDate === '' || endDate === '' ||
             entryPoint === '' || exitPoint === '' || longestPortage === '' ||
@@ -43,6 +44,11 @@ function AddTrip() {
             dispatch({
                 type: 'ADD_NEW_TRIP',
                 payload: newTripInfo
+            });
+            // trip added confirmation alert
+            swal({
+                text: "Your trip has been added!",
+                icon: "success",
             });
             // send user to user page
             history.push('/user');
