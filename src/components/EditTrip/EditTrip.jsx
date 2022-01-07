@@ -121,25 +121,42 @@ function EditTrip() {
     // console.log('startDate', startDate);
 
     // handle click of save button
-    // const handleSaveClick = () => {
-    //     // bundle trip edits into object
-    //     const tripEdits = {
-    //         tripId, tripName, startDate, endDate,
-    //         entryPoint, exitPoint, longestPortage,
-    //         lakes, tripComments, imagePath,
-    //         imageDescription
-    //     };
-    //     console.log('tripEdits object', tripEdits);
+    const handleSaveClick = () => {
 
-    // dispatch object to saga function
-    // dispatch({
-    //     type: 'SEND_TRIP_EDITS',
-    //     payload: tripEdits
-    // });
+        // store reducer info in variables
+        let tripId = tripDetails.id;
+        let tripName = tripDetails.trip_name;
+        let startDate = tripDetails.start_date;
+        let endDate = tripDetails.end_date;
+        let entryPoint = tripDetails.entry_point;
+        let exitPoint = tripDetails.exit_point;
+        let longestPortage = tripDetails.longest_portage;
+        let lakes = tripDetails.lakes;
+        let tripComments = tripDetails.comments;
+        let imagePath = tripDetails.image_url;
+        let imageDescription = tripDetails.image_description;
 
-    // send user to user page
-    //     history.push('/user');
-    // };
+        // bundle trip edits into object
+        const tripEdits = {
+            tripId, tripName, startDate, endDate,
+            entryPoint, exitPoint, longestPortage,
+            lakes, tripComments, imagePath,
+            imageDescription
+        };
+        // console.log('tripEdits object', tripEdits);
+
+        // dispatch object to saga function
+        dispatch({
+            type: 'SEND_TRIP_EDITS',
+            payload: tripEdits
+        });
+        // clear reducer
+        dispatch({
+            type: 'CLEAR_TRIP_DETAILS'
+        });
+        // send user to user page
+        history.push('/user');
+    };
 
     return (
         <div className="container">
@@ -270,12 +287,12 @@ function EditTrip() {
                     value={tripDetails.image_description || ''}
                     label='Image Description'
                     style={{ width: '90%' }}
-                    onChange={handleImageDescriptionChange} 
+                    onChange={handleImageDescriptionChange}
                 />
                 <br></br>
             </Grid>
 
-            {/* <Grid
+            <Grid
                 container
                 direction="row"
                 justifyContent="space-evenly"
@@ -284,7 +301,7 @@ function EditTrip() {
                 <Button
                     variant="contained"
                     style={{ backgroundColor: '#a1b26a', color: 'white' }}
-                    onClick={handleSaveClick}
+                onClick={handleSaveClick}
                 >
                     Save
                 </Button>
@@ -292,14 +309,15 @@ function EditTrip() {
                 <Button
                     variant="contained"
                     style={{ backgroundColor: 'white', color: 'black' }}
-                    // send user back to user page on click
-                    onClick={() => {
-                        history.push('/user');
-                    }}>
+                // send user back to user page on click
+                // onClick={() => {
+                //     history.push('/user');
+                // }}
+                >
                     Cancel
                 </Button>
 
-            </Grid> */}
+            </Grid>
 
 
         </div>

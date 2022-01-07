@@ -1,6 +1,6 @@
 /* reducer to hold trip details for trip 
 details and edit trip views */
-const tripDetails = (state = [], action) => {
+const tripDetails = (state = {}, action) => {
     switch (action.type) {
         case 'SET_TRIP_DETAILS':
             return action.payload;
@@ -24,6 +24,8 @@ const tripDetails = (state = [], action) => {
             return { ...state, image_url: action.payload };
         case 'EDIT_IMAGE_DESCRIPTION':
             return { ...state, image_description: action.payload };
+        case 'CLEAR_TRIP_DETAILS':
+            return {};
         default:
             return state;
     }

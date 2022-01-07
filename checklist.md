@@ -1,21 +1,22 @@
 ## To Do:
 
-### Add Trip
-- [x] Create edit trip component
-*trip details page*
-- [x] wire edit button to send user and trip id to edit page
-*edit trip page*
-- [x] setup useEffect to fire dispatch to trip details saga function to fetch trip details (w/payload of params.id)
-- [x] setup local state w/ start values equal to trip to edit reducer
-- [x] Save Changes & Cancel buttons, wire cancel click route to user page
-- [x] bundle local state into object (like add page)
-- [x] create saga function w/ axios PUT route
-- [x] dispatch object w/local state to saga function w/ PUT route
-- [x] setup PUT route in server to update item
+### Edit Trip
+- On save button click
+    - [x] bundle reducer values into object
+    - [x] dispatch object to saga function
+    - [ ] provide confirmation alert to user
+    - [x] clear reducer
+    - [x] send user to user page
+- On cancel button click
+    - [ ] clear reducer
+    - [ ] send user to user page
 
-
+- In trip details page view
+    - [ ] clear reducer on click of back, edit(?) and delete buttons
 
 ### Future To Do's
+- Add user confirmation alert on add trip and delete trip(?) components
+- Move individual trips to own component
 - Trip details page layout (checkout responsive pricing table layouts)
 - Only allow user to add trip if date is in certain format on add trip page
 - on edit trip page, input values stay populated with trip details on page refresh
