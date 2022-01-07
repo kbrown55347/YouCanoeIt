@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 // MUI imports
 import { Button, TextField, Grid } from '@mui/material';
+// sweetalert imports
+import swal from '@sweetalert/with-react'
 
 function EditTrip() {
     const dispatch = useDispatch();
@@ -19,7 +21,7 @@ function EditTrip() {
 
     /* access trip details reducer */
     const tripDetails = useSelector(store => store.tripDetails);
-    console.log('in EditTrip', tripDetails);
+    //console.log('in EditTrip', tripDetails);
 
     const params = useParams();
 
@@ -130,6 +132,11 @@ function EditTrip() {
         dispatch({
             type: 'SEND_TRIP_EDITS',
             payload: tripEdits
+        });
+        swal({
+            text: "Your trip details have been updated!",
+            icon: "success",
+            button: "Yay",
         });
         // clear reducer
         dispatch({
@@ -307,10 +314,8 @@ function EditTrip() {
 
             </Grid>
 
-
         </div>
     )
-
 }; // end EditTrip
 
 export default EditTrip;

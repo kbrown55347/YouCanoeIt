@@ -4,7 +4,7 @@
 - On save button click
     - [x] bundle reducer values into object
     - [x] dispatch object to saga function
-    - [ ] provide confirmation alert to user
+    - [x] provide confirmation alert to user
     - [x] clear reducer
     - [x] send user to user page
 - On cancel button click
