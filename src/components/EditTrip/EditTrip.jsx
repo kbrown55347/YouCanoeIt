@@ -137,7 +137,6 @@ function EditTrip() {
         swal({
             text: "Your trip details have been updated!",
             icon: "success",
-            button: "Yay",
         });
         // clear reducer
         dispatch({
@@ -149,12 +148,12 @@ function EditTrip() {
 
     // handle click of cancel button
     const handleCancelClick = () => {
+        // send user back to details page for trip
+        history.push(`/trip_details/${tripDetails.id}`);
         // clear reducer
         dispatch({
             type: 'CLEAR_TRIP_DETAILS'
         });
-        // send user to user page
-        history.push('/user');
     };
 
     return (
