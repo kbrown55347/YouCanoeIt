@@ -3,9 +3,9 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import TripItem from '../TripItem/TripItem';
 // MUI imports
 import { Button, Grid } from '@mui/material';
-
 // import css
 import './UserPage.css';
 
@@ -45,30 +45,11 @@ function UserPage() {
         </Button>
       </Grid>
 
-      {/* map through pastTrips reducer and append each item to DOM */}
-      {pastTrips.map(trip => (
-        <div key={trip.id} className="trip_list_item">
-          <h4>{trip.trip_name}</h4>
-          <p>{trip.start_date} to {trip.end_date}</p>
-          
-          <img
-            src={trip.image_url}
-            alt='trip image'
-          >
-          </img>
-          <br></br>
-            <Button
-              variant="contained"
-              style={{ backgroundColor: '#a1b26a', color: 'white' }}
-              // send user to trip details page on click of View Details button
-              onClick={() => {
-                history.push(`/trip_details/${trip.id}`);
-              }}
-            >View Details</Button>
-        </div>
-
-      ))
-      }
+      {/* map through pastTrips reducer and append 
+      each trip item to DOM using props*/}
+      {pastTrips.map(trip => {
+        return <TripItem key={trip.id} trip={trip}/>
+      })}
 
     </div >
   );
