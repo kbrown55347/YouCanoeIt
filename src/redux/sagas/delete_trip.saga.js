@@ -8,10 +8,10 @@ function* deleteTrip(action) {
             method: 'DELETE',
             url: `api/trips/${action.payload}`
         });
-        console.log('in fetchTripDetails, response.data from DB:', response.data);
+        // console.log('in deleteTrip saga, response.data:', response.data);
     } catch (err) {
-        console.error('fetchTripDetails error', err);
-    }
+        console.error('deleteTrip saga error', err);
+    };
 }; // end deleteTrip
 
 // Saga function to intercept dispatches

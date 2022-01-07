@@ -43,7 +43,7 @@ function AddTrip() {
             dispatch({
                 type: 'ADD_NEW_TRIP',
                 payload: newTripInfo
-            })
+            });
             // send user to user page
             history.push('/user');
         };

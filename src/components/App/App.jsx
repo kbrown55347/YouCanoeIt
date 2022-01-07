@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import AddTrip from '../AddTrip/AddTrip';
 import TripDetails from '../TripDetails/TripDetails';
+import EditTrip from '../EditTrip/EditTrip';
 
 import './App.css';
 
@@ -84,6 +85,14 @@ function App() {
             path="/trip_details/:id"
           >
             <TripDetails />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows EditTrip else shows LoginPage
+            exact
+            path="/edit_trip/:id"
+          >
+            <EditTrip />
           </ProtectedRoute>
 
           <Route

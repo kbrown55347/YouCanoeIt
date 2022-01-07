@@ -83,6 +83,7 @@ function TripDetails() {
                     <Button
                         variant="contained"
                         style={{ backgroundColor: 'white', color: 'black' }}
+                        // send user to user page on click
                         onClick={() => {
                             history.push('/user');
                         }}>
@@ -90,7 +91,11 @@ function TripDetails() {
                     </Button>
                     <Button
                         variant="contained"
-                        style={{ backgroundColor: '#a1b26a', color: 'white' }}>
+                        style={{ backgroundColor: '#a1b26a', color: 'white' }}
+                        // send user to edit trip page on click
+                        onClick={() => {
+                            history.push(`/edit_trip/${tripDetails.id}`);
+                        }}>
                         Edit
                     </Button>
 
