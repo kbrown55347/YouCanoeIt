@@ -1,5 +1,10 @@
 ## To Do:
 
+
+### Date Selector
+- [ ] add date selector feature to add trip page
+- [ ] add date selector feature to edit trip page
+
 ### Trip Item
 - Trip Details Page
 - Format Trip Details display

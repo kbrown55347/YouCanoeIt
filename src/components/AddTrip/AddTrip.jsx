@@ -3,6 +3,10 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 // MUI imports
 import { Button, TextField, Grid } from '@mui/material';
+// MUI imports for date picker
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import MobileDatePicker from '@mui/lab/MobileDatePicker';
 // sweetalert imports
 import swal from '@sweetalert/with-react';
 
@@ -14,7 +18,7 @@ function AddTrip() {
 
     // local states to collect trip info
     let [tripName, setTripName] = useState('');
-    let [startDate, setStartDate] = useState('');
+    let [startDate, setStartDate] = useState(null);
     let [endDate, setEndDate] = useState('');
     let [entryPoint, setEntryPoint] = useState('');
     let [exitPoint, setExitPoint] = useState('');
@@ -26,6 +30,9 @@ function AddTrip() {
 
     // handle click of add trip button
     const handleAddTripClick = () => {
+        console.log('in newTripInfo object, startDate:', startDate);
+        console.log('in newTripInfo object, endDate:', endDate);
+
         // bundle new trip into object
         const newTripInfo = {
             tripName, startDate, endDate,
@@ -82,14 +89,23 @@ function AddTrip() {
                 alignItems="center"
             >
                 {/* info for start_date */}
-                <TextField
+                {/* <TextField
                     variant="standard"
                     type='text'
                     value={startDate}
                     label='Start Date'
                     placeholder='MM/DD/YYYY'
                     style={{ width: '43%' }}
-                    onChange={(event) => setStartDate(event.target.value)} />
+                    onChange={(event) => setStartDate(event.target.value)} /> */}
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <MobileDatePicker
+                        label="Start Date"
+                        inputFormat="MM/dd/yyyy"
+                        value={startDate}
+                        onChange={(newValue) => setStartDate(newValue)}
+                        renderInput={(params) => <TextField {...params} />}
+                    />
+                </LocalizationProvider>
                 {/* info for end_date */}
                 <TextField
                     variant="standard"
