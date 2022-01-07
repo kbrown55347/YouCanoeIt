@@ -103,23 +103,6 @@ function EditTrip() {
         });
     };
 
-    // local states to collect trip info
-    // set initial value of state to equal info from tripDetails reducer
-    // let [startDate, setStartDate] = useState(tripDetails.start_date);
-    // let [endDate, setEndDate] = useState(tripDetails.end_date);
-    // let [entryPoint, setEntryPoint] = useState(tripDetails.entry_point);
-    // let [exitPoint, setExitPoint] = useState(tripDetails.exit_point);
-    // let [longestPortage, setLongestPortage] = useState(tripDetails.longest_portage);
-    // let [lakes, setLakes] = useState(tripDetails.lakes);
-    // let [tripComments, setTripComments] = useState(tripDetails.comments);
-    // let [imagePath, setImagePath] = useState(tripDetails.image_url);
-    // let [imageDescription, setImageDescription] = useState(tripDetails.image_description);
-
-    // let tripId = tripDetails.id;
-
-    // console.log('tripName', tripName);
-    // console.log('startDate', startDate);
-
     // handle click of save button
     const handleSaveClick = () => {
 
@@ -143,13 +126,21 @@ function EditTrip() {
             lakes, tripComments, imagePath,
             imageDescription
         };
-        // console.log('tripEdits object', tripEdits);
-
         // dispatch object to saga function
         dispatch({
             type: 'SEND_TRIP_EDITS',
             payload: tripEdits
         });
+        // clear reducer
+        dispatch({
+            type: 'CLEAR_TRIP_DETAILS'
+        });
+        // send user to user page
+        history.push('/user');
+    };
+
+    // handle click of cancel button
+    const handleCancelClick = () => {
         // clear reducer
         dispatch({
             type: 'CLEAR_TRIP_DETAILS'
@@ -301,7 +292,7 @@ function EditTrip() {
                 <Button
                     variant="contained"
                     style={{ backgroundColor: '#a1b26a', color: 'white' }}
-                onClick={handleSaveClick}
+                    onClick={handleSaveClick}
                 >
                     Save
                 </Button>
@@ -309,10 +300,7 @@ function EditTrip() {
                 <Button
                     variant="contained"
                     style={{ backgroundColor: 'white', color: 'black' }}
-                // send user back to user page on click
-                // onClick={() => {
-                //     history.push('/user');
-                // }}
+                    onClick={handleCancelClick}
                 >
                     Cancel
                 </Button>

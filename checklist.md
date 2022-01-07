@@ -8,8 +8,8 @@
     - [x] clear reducer
     - [x] send user to user page
 - On cancel button click
-    - [ ] clear reducer
-    - [ ] send user to user page
+    - [x] clear reducer
+    - [x] send user to user page
 
 - In trip details page view
     - [ ] clear reducer on click of back, edit(?) and delete buttons
