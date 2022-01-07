@@ -9,8 +9,8 @@ function* addNewTrip(action) {
             url: 'api/trips/add',
             data: action.payload
         })
-        // console.log('in addNewTrip', action.payload);
-
+        // re-render fetch past trips saga function
+        yield put({ type: 'FETCH_PAST_TRIPS' })
     } catch (err) {
         console.error('addNewTrip error', err);
     }

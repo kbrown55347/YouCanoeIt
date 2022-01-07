@@ -1,4 +1,4 @@
-import { takeEvery } from 'redux-saga/effects';
+import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
 // Saga function to DELETE trip from DB
@@ -8,7 +8,8 @@ function* deleteTrip(action) {
             method: 'DELETE',
             url: `api/trips/${action.payload}`
         });
-        // console.log('in deleteTrip saga, response.data:', response.data);
+        // re-render fetch past trips saga function
+        yield put({ type: 'FETCH_PAST_TRIPS' })
     } catch (err) {
         console.error('deleteTrip saga error', err);
     };

@@ -14,7 +14,8 @@ function* sendEditedTripInfo(action) {
             // send trip edits object
             data: action.payload
         });
-        console.log('in sendEditedTripInfo, response.data:', response.data);
+        // re-render fetch past trips saga function
+        yield put({ type: 'FETCH_PAST_TRIPS' })
     } catch (err) {
         console.error('sendEditedTripInfo error', err);
     };
