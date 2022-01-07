@@ -47,8 +47,8 @@ function TripDetails() {
         setOpen(false);
     };
 
-    // handle click of back button
-    const handleBackClick = () => {
+    // handle click of home button
+    const handleHomeClick = () => {
         // clear reducer
         dispatch({
             type: 'CLEAR_TRIP_DETAILS'
@@ -115,9 +115,9 @@ function TripDetails() {
                     <Button
                         variant="contained"
                         style={{ backgroundColor: 'white', color: 'black' }}
-                        onClick={handleBackClick}
+                        onClick={handleHomeClick}
                     >
-                        Back
+                        Home
                     </Button>
                     <Button
                         variant="contained"
