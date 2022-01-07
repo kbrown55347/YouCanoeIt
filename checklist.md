@@ -12,7 +12,7 @@
     - [x] send user to user page
 
 - In trip details page view
-    - [ ] clear reducer on click of back, edit(?) and delete buttons
+    - [x] clear reducer on click of back, edit(?) and delete buttons
 
 ### Future To Do's
 - Add user confirmation alert on add trip and delete trip(?) components
