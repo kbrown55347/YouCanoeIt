@@ -10,6 +10,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
+// sweetalert imports
+import swal from '@sweetalert/with-react';
 
 // import css
 import './TripDetails.css';
@@ -72,6 +74,11 @@ function TripDetails() {
             type: 'DELETE_TRIP',
             payload: params.id
         })
+        // trip deleted confirmation alert
+        swal({
+            text: "This trip has been removed from your account.",
+            icon: "success",
+        });
         // clear reducer
         dispatch({
             type: 'CLEAR_TRIP_DETAILS'

@@ -133,6 +133,7 @@ function EditTrip() {
             type: 'SEND_TRIP_EDITS',
             payload: tripEdits
         });
+        // trip details updated confirmation alert
         swal({
             text: "Your trip details have been updated!",
             icon: "success",
