@@ -91,7 +91,8 @@ function TripDetails() {
         <div className="container">
 
             <h2 className="page-title">Trip Details</h2>
-
+            
+            {/* trip details info */}
             <div key={tripDetails.id}>
                 <h4>{tripDetails.trip_name}</h4>
                 <p>Dates: {tripDetails.start_date} to {tripDetails.end_date}</p>
@@ -106,6 +107,7 @@ function TripDetails() {
                 </img>
                 <p>{tripDetails.image_description}</p>
 
+                {/* buttons */}
                 <Grid
                     container
                     direction="row"

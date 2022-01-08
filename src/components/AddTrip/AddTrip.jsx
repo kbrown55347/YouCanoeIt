@@ -2,9 +2,15 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 // MUI imports
-import { Button, TextField, Grid } from '@mui/material';
+import { Button, TextField, Grid, Box } from '@mui/material';
+// MUI imports for date range picker
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import MobileDateRangePicker from '@mui/lab/MobileDateRangePicker';
 // sweetalert imports
 import swal from '@sweetalert/with-react';
+// import css
+import './AddTrip.css';
 
 
 function AddTrip() {
@@ -14,8 +20,7 @@ function AddTrip() {
 
     // local states to collect trip info
     let [tripName, setTripName] = useState('');
-    let [startDate, setStartDate] = useState('');
-    let [endDate, setEndDate] = useState('');
+    let [tripDateRange, setTripDateRange] = useState([null, null]);
     let [entryPoint, setEntryPoint] = useState('');
     let [exitPoint, setExitPoint] = useState('');
     let [longestPortage, setLongestPortage] = useState('');
@@ -26,6 +31,10 @@ function AddTrip() {
 
     // handle click of add trip button
     const handleAddTripClick = () => {
+
+        let startDate = tripDateRange[0];
+        let endDate = tripDateRange[1];
+
         // bundle new trip into object
         const newTripInfo = {
             tripName, startDate, endDate,
@@ -66,39 +75,39 @@ function AddTrip() {
             >
                 {/* info for trip_name */}
                 <TextField
-                    variant="standard"
+                    variant="outlined"
                     type='text'
                     value={tripName}
                     label='Trip Name'
-                    style={{ width: '90%' }}
+                    style={{ width: '100%' }}
                     onChange={(event) => setTripName(event.target.value)} />
             </Grid>
             <br></br>
 
             <Grid
                 container
-                direction="row"
+                direction="column"
                 justifyContent="space-evenly"
                 alignItems="center"
             >
-                {/* info for start_date */}
-                <TextField
-                    variant="standard"
-                    type='text'
-                    value={startDate}
-                    label='Start Date'
-                    placeholder='MM/DD/YYYY'
-                    style={{ width: '43%' }}
-                    onChange={(event) => setStartDate(event.target.value)} />
-                {/* info for end_date */}
-                <TextField
-                    variant="standard"
-                    type='text'
-                    value={endDate}
-                    label='End Date'
-                    placeholder='MM/DD/YYYY'
-                    style={{ width: '43%' }}
-                    onChange={(event) => setEndDate(event.target.value)} />
+                {/* info for start_date and end_date using MUI date range picker */}
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <MobileDateRangePicker
+                        startText="Start Date"
+                        endText="End Date"
+                        value={tripDateRange}
+                        onChange={(newValue) => {
+                            setTripDateRange(newValue);
+                        }}
+                        renderInput={(startProps, endProps) => (
+                            <React.Fragment>
+                                <TextField {...startProps} />
+                                <Box sx={{ mx: 1 }}> to </Box>
+                                <TextField {...endProps} />
+                            </React.Fragment>
+                        )}
+                    />
+                </LocalizationProvider>
             </Grid>
             <br></br>
 
@@ -112,19 +121,20 @@ function AddTrip() {
             >
                 {/* info for entry_point */}
                 <TextField
-                    variant="standard"
+                    variant="outlined"
                     type='text'
                     value={entryPoint}
                     label='Entry Point'
-                    style={{ width: '43%' }}
+                    style={{ width: '45%' }}
                     onChange={(event) => setEntryPoint(event.target.value)} />
+                <Box sx={{ mx: 1 }}> to </Box>
                 {/* info for exit_point */}
                 <TextField
-                    variant="standard"
+                    variant="outlined"
                     type='text'
                     value={exitPoint}
                     label='Exit Point'
-                    style={{ width: '43%' }}
+                    style={{ width: '45%' }}
                     onChange={(event) => setExitPoint(event.target.value)} />
             </Grid>
             <br></br>
@@ -136,46 +146,46 @@ function AddTrip() {
             >
                 {/* info for longest_portage */}
                 <TextField
-                    variant="standard"
+                    variant="outlined"
                     type='text'
                     value={longestPortage}
                     label='Longest Portage'
-                    style={{ width: '90%' }}
+                    style={{ width: '100%' }}
                     onChange={(event) => setLongestPortage(event.target.value)} />
                 <br></br>
                 {/* info for lakes */}
                 <TextField
-                    variant="standard"
+                    variant="outlined"
                     type='text' multiline rows={2}
                     value={lakes}
                     label='Lakes Traveled'
-                    style={{ width: '90%' }}
+                    style={{ width: '100%' }}
                     onChange={(event) => setLakes(event.target.value)} />
                 <br></br>
                 {/* info for comments */}
                 <TextField
-                    variant="standard"
+                    variant="outlined"
                     type='text' multiline rows={2}
                     value={tripComments}
                     label='Trip Comments'
-                    style={{ width: '90%' }}
+                    style={{ width: '100%' }}
                     onChange={(event) => setTripComments(event.target.value)} />
                 <br></br>
                 {/* info for image_url */}
                 <TextField
-                    variant="standard"
+                    variant="outlined"
                     value={imagePath}
                     label='Image URL'
-                    style={{ width: '90%' }}
+                    style={{ width: '100%' }}
                     onChange={(event) => setImagePath(event.target.value)} />
                 <br></br>
                 {/* info for image_description */}
                 <TextField
-                    variant="standard"
+                    variant="outlined"
                     type='text' multiline rows={2}
                     value={imageDescription}
                     label='Image Description'
-                    style={{ width: '90%' }}
+                    style={{ width: '100%' }}
                     onChange={(event) => setImageDescription(event.target.value)} />
                 <br></br>
             </Grid>
