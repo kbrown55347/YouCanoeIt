@@ -2,7 +2,11 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 // MUI imports
-import { Button, TextField, Grid } from '@mui/material';
+import { Button, TextField, Grid, Box } from '@mui/material';
+// MUI imports for date range picker
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import MobileDateRangePicker from '@mui/lab/MobileDateRangePicker';
 // sweetalert imports
 import swal from '@sweetalert/with-react'
 
@@ -21,7 +25,6 @@ function EditTrip() {
 
     /* access trip details reducer */
     const tripDetails = useSelector(store => store.tripDetails);
-    //console.log('in EditTrip', tripDetails);
 
     const params = useParams();
 
@@ -33,19 +36,21 @@ function EditTrip() {
         });
     };
 
-    // handle start date change
-    const handleStartDateChange = (event) => {
+    // handle trip date changes
+    const handleTripDateChanges = (values) => {
+        // separate values and assign to variables
+        let startDate = values[0];
+        let endDate = values[1];
+
+        // dispatch to reducer, send start date
         dispatch({
             type: 'EDIT_START_DATE',
-            payload: event.target.value
+            payload: startDate
         });
-    };
-
-    // handle end date change
-    const handleEndDateChange = (event) => {
+        // dispatch to reducer, send end date
         dispatch({
             type: 'EDIT_END_DATE',
-            payload: event.target.value
+            payload: endDate
         });
     };
 
@@ -168,11 +173,11 @@ function EditTrip() {
             >
                 {/* info for trip_name */}
                 <TextField
-                    variant="standard"
+                    variant="outlined"
                     type='text'
                     value={tripDetails.trip_name || ''}
                     label='Trip Name'
-                    style={{ width: '90%' }}
+                    style={{ width: '100%' }}
                     onChange={handleTripNameChange}
                 />
             </Grid>
@@ -184,26 +189,26 @@ function EditTrip() {
                 justifyContent="space-evenly"
                 alignItems="center"
             >
-                {/* info for start_date */}
-                <TextField
-                    variant="standard"
-                    type='text'
-                    value={tripDetails.start_date || ''}
-                    label='Start Date'
-                    placeholder='MM/DD/YYYY'
-                    style={{ width: '43%' }}
-                    onChange={handleStartDateChange}
-                />
-                {/* info for end_date */}
-                <TextField
-                    variant="standard"
-                    type='text'
-                    value={tripDetails.end_date || ''}
-                    label='End Date'
-                    placeholder='MM/DD/YYYY'
-                    style={{ width: '43%' }}
-                    onChange={handleEndDateChange}
-                />
+
+                {/* info for start_date and end_date using 
+                MUI date range picker */}
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <MobileDateRangePicker
+                        startText="Start Date"
+                        endText="End Date"
+                        value={[tripDetails.start_date, tripDetails.end_date] || [null, null]}
+                        onChange={(newValues) => {
+                            handleTripDateChanges(newValues);
+                        }}
+                        renderInput={(startProps, endProps) => (
+                            <React.Fragment>
+                                <TextField {...startProps} />
+                                <Box sx={{ mx: 1 }}> to </Box>
+                                <TextField {...endProps} />
+                            </React.Fragment>
+                        )}
+                    />
+                </LocalizationProvider>
             </Grid>
             <br></br>
 
@@ -215,20 +220,21 @@ function EditTrip() {
             >
                 {/* info for entry_point */}
                 <TextField
-                    variant="standard"
+                    variant="outlined"
                     type='text'
                     value={tripDetails.entry_point || ''}
                     label='Entry Point'
-                    style={{ width: '43%' }}
+                    style={{ width: '45%' }}
                     onChange={handleEntryPointChange}
                 />
+                <Box sx={{ mx: 1 }}> to </Box>
                 {/* info for exit_point */}
                 <TextField
-                    variant="standard"
+                    variant="outlined"
                     type='text'
                     value={tripDetails.exit_point || ''}
                     label='Exit Point'
-                    style={{ width: '43%' }}
+                    style={{ width: '45%' }}
                     onChange={handleExitPointChange}
                 />
             </Grid>
@@ -241,50 +247,50 @@ function EditTrip() {
             >
                 {/* info for longest_portage */}
                 <TextField
-                    variant="standard"
+                    variant="outlined"
                     type='text'
                     value={tripDetails.longest_portage || ''}
                     label='Longest Portage'
-                    style={{ width: '90%' }}
+                    style={{ width: '100%' }}
                     onChange={handleLongestPortageChange}
                 />
                 <br></br>
                 {/* info for lakes */}
                 <TextField
-                    variant="standard"
+                    variant="outlined"
                     type='text' multiline rows={2}
                     value={tripDetails.lakes || ''}
                     label='Lakes Traveled'
-                    style={{ width: '90%' }}
+                    style={{ width: '100%' }}
                     onChange={handleLakesChange}
                 />
                 <br></br>
                 {/* info for comments */}
                 <TextField
-                    variant="standard"
+                    variant="outlined"
                     type='text' multiline rows={2}
                     value={tripDetails.comments || ''}
                     label='Trip Comments'
-                    style={{ width: '90%' }}
+                    style={{ width: '100%' }}
                     onChange={handleCommentsChange}
                 />
                 <br></br>
                 {/* info for image_url */}
                 <TextField
-                    variant="standard"
+                    variant="outlined"
                     value={tripDetails.image_url || ''}
                     label='Image URL'
-                    style={{ width: '90%' }}
+                    style={{ width: '100%' }}
                     onChange={handleImageUrlChange}
                 />
                 <br></br>
                 {/* info for image_description */}
                 <TextField
-                    variant="standard"
+                    variant="outlined"
                     type='text' multiline rows={2}
                     value={tripDetails.image_description || ''}
                     label='Image Description'
-                    style={{ width: '90%' }}
+                    style={{ width: '100%' }}
                     onChange={handleImageDescriptionChange}
                 />
                 <br></br>

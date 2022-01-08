@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 // MUI imports
 import { Button, TextField, Grid, Box } from '@mui/material';
-// MUI imports for date picker
+// MUI imports for date range picker
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import MobileDateRangePicker from '@mui/lab/MobileDateRangePicker';
@@ -108,28 +108,6 @@ function AddTrip() {
                         )}
                     />
                 </LocalizationProvider>
-
-
-                {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <MobileDatePicker
-                        label="Start Date"
-                        inputFormat="MM/dd/yyyy"
-                        value={startDate}
-                        onChange={(newValue) => setStartDate(newValue)}
-                        renderInput={(params) => <TextField {...params} />}
-                    />
-                </LocalizationProvider> */}
-                {/* <br></br> */}
-                {/* info for end_date */}
-                {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <MobileDatePicker
-                        label="End Date"
-                        inputFormat="MM/dd/yyyy"
-                        value={endDate}
-                        onChange={(newValue) => setEndDate(newValue)}
-                        renderInput={(params) => <TextField {...params} />}
-                    />
-                </LocalizationProvider> */}
             </Grid>
             <br></br>
 
