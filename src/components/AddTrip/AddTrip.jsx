@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 // import axios for upload to cloudinary API
 import axios from 'axios';
-// require dotenv - SECURITY
+//require dotenv - SECURITY
 // require('dotenv').config();
 // MUI imports
 import { Button, TextField, Grid, Box } from '@mui/material';
@@ -15,8 +15,8 @@ import MobileDateRangePicker from '@mui/lab/MobileDateRangePicker';
 import swal from '@sweetalert/with-react';
 // import css
 import './AddTrip.css';
-// for getting image from cloudinary
-import { Image } from 'cloudinary-react';
+// // for getting image from cloudinary
+// import { Image } from 'cloudinary-react';
 
 
 function AddTrip() {
@@ -51,9 +51,9 @@ function AddTrip() {
         // // append file we want to work with to form data
         // formData.append('file', imageSelected);
         // // append cloudinary public upload presets
-        // formData.append('upload_preset', '');
+        // formData.append('upload_preset', 'process.env.CLOUDINARY_UPLOAD_PRESET');
         // // make axios POST request to send info to cloudinary w/ endpoint image/upload
-        // axios.post(`https://api.cloudinary.com/v1_1/cloud_name/image/upload`, formData)
+        // axios.post(`https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload`, formData)
         //     .then((response) => {
         //         console.log(response.data.url);
         //         setCloudinaryImageUrl(response.data.url);

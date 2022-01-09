@@ -11,6 +11,8 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 // require in past trips router
 const pastTripsRouter = require ('./routes/trips.router');
+// require in image upload router
+const imageUploadRouter = require ('./routes/image_upload.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -28,6 +30,8 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 // trips route
 app.use('/api/trips', pastTripsRouter);
+// image_upload route
+app.use('/api/image_upload', imageUploadRouter);
 
 // Serve static files
 app.use(express.static('build'));
