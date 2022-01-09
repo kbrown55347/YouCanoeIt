@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+// import axios for upload to cloudinary API
+import axios from 'axios';
+// require dotenv - SECURITY
+// require('dotenv').config();
 // MUI imports
 import { Button, TextField, Grid, Box } from '@mui/material';
 // MUI imports for date range picker
@@ -11,6 +15,8 @@ import MobileDateRangePicker from '@mui/lab/MobileDateRangePicker';
 import swal from '@sweetalert/with-react';
 // import css
 import './AddTrip.css';
+// for getting image from cloudinary
+import { Image } from 'cloudinary-react';
 
 
 function AddTrip() {
@@ -28,6 +34,31 @@ function AddTrip() {
     let [tripComments, setTripComments] = useState('');
     let [imagePath, setImagePath] = useState('');
     let [imageDescription, setImageDescription] = useState('');
+
+    // state to hold image file
+    const [imageSelected, setImageSelected] = useState('');
+    const [cloudinaryImageUrl, setCloudinaryImageUrl] = useState('');
+    // handle image upload
+    const uploadImage = () => {
+        // const { CLOUDINARY_CLOUD_NAME } = process.env;
+        // const { CLOUDINARY_UPLOAD_PRESET } = process.env;
+        // const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+        // console.log(files[0]);
+        // make API request to cloudinary
+        const formData = new FormData();
+        // append file we want to work with to form data
+        formData.append('file', imageSelected);
+        // append cloudinary public upload presets
+        formData.append('upload_preset', 'upload_preset');
+        // make axios POST request to send info to cloudinary w/ endpoint image/upload
+        axios.post(`https://api.cloudinary.com/v1_1/cloud_name/image/upload`, formData)
+            .then((response) => {
+                console.log(response.data.url);
+                setCloudinaryImageUrl(response.data.url);
+            });
+    };
+
+
 
     // handle click of add trip button
     const handleAddTripClick = () => {
@@ -111,8 +142,6 @@ function AddTrip() {
             </Grid>
             <br></br>
 
-
-
             <Grid
                 container
                 direction="row"
@@ -171,14 +200,34 @@ function AddTrip() {
                     style={{ width: '100%' }}
                     onChange={(event) => setTripComments(event.target.value)} />
                 <br></br>
+
+                {/* image upload */}
+                <div>
+                    <input type="file"
+                        onChange={(event) => { setImageSelected(event.target.files[0]) }}
+                    />
+                    <button
+                        onClick={uploadImage}
+                    >Upload Image</button>
+                    {/* <Image
+                        cloudName=""
+                        style={{width: 200}}
+                        publicId={cloudinaryPublicId}
+                    /> */}
+                    <img
+                        src={cloudinaryImageUrl}
+                        alt="image"
+                    />
+                </div>
+
                 {/* info for image_url */}
-                <TextField
+                {/* <TextField
                     variant="outlined"
                     value={imagePath}
                     label='Image URL'
                     style={{ width: '100%' }}
                     onChange={(event) => setImagePath(event.target.value)} />
-                <br></br>
+                <br></br> */}
                 {/* info for image_description */}
                 <TextField
                     variant="outlined"
