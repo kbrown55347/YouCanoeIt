@@ -40,22 +40,24 @@ function AddTrip() {
     const [cloudinaryImageUrl, setCloudinaryImageUrl] = useState('');
     // handle image upload
     const uploadImage = () => {
-        // const { CLOUDINARY_CLOUD_NAME } = process.env;
-        // const { CLOUDINARY_UPLOAD_PRESET } = process.env;
-        // const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
-        // console.log(files[0]);
+        // dispatch image info
+        dispatch({
+            type: 'SEND_IMAGE_UPLOAD',
+            payload: imageSelected
+        });
+        // console.log(imageSelected);
         // make API request to cloudinary
-        const formData = new FormData();
-        // append file we want to work with to form data
-        formData.append('file', imageSelected);
-        // append cloudinary public upload presets
-        formData.append('upload_preset', 'upload_preset');
-        // make axios POST request to send info to cloudinary w/ endpoint image/upload
-        axios.post(`https://api.cloudinary.com/v1_1/cloud_name/image/upload`, formData)
-            .then((response) => {
-                console.log(response.data.url);
-                setCloudinaryImageUrl(response.data.url);
-            });
+        // const formData = new FormData();
+        // // append file we want to work with to form data
+        // formData.append('file', imageSelected);
+        // // append cloudinary public upload presets
+        // formData.append('upload_preset', '');
+        // // make axios POST request to send info to cloudinary w/ endpoint image/upload
+        // axios.post(`https://api.cloudinary.com/v1_1/cloud_name/image/upload`, formData)
+        //     .then((response) => {
+        //         console.log(response.data.url);
+        //         setCloudinaryImageUrl(response.data.url);
+        //     });
     };
 
 
@@ -203,21 +205,21 @@ function AddTrip() {
 
                 {/* image upload */}
                 <div>
-                    <input type="file"
-                        onChange={(event) => { setImageSelected(event.target.files[0]) }}
-                    />
-                    <button
+                        <input type="file"
+                            onChange={(event) => { setImageSelected(event.target.files[0]) }}
+                        />
+                        <button
                         onClick={uploadImage}
                     >Upload Image</button>
-                    {/* <Image
+                        {/* <Image
                         cloudName=""
                         style={{width: 200}}
                         publicId={cloudinaryPublicId}
                     /> */}
-                    <img
-                        src={cloudinaryImageUrl}
-                        alt="image"
-                    />
+                        <img
+                            src={cloudinaryImageUrl}
+                            alt="image"
+                        />
                 </div>
 
                 {/* info for image_url */}
