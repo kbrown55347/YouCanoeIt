@@ -2,13 +2,12 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
-// needed for cloudinary image upload
-const multer = require('multer');
-const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
+// for cloudinary upload
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const multer = require("multer");
 require('dotenv').config();
 
-// to access cloudinary account
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -18,16 +17,11 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: "testing",
+    folder: "YouCanoeIt",
   },
 });
 
-const upload = multer({ storage: storage });
-
-
-
-
-
+const cloudinaryUpload = multer({ storage: storage });
 
 // This GET route returns logged in users past trips
 router.get('/', rejectUnauthenticated, (req, res) => {
@@ -108,31 +102,33 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 
 
 // POST route to add new trip to db
-router.post('/add', rejectUnauthenticated, (req, res) => {
-  // console.log('in trips/add POST', req.body);
-  const queryText = `
-    INSERT INTO "trips"
-      ("trip_name", "start_date", "end_date", "entry_point", 
-      "exit_point", "longest_portage", "lakes", "comments", 
-      "image_url", "image_description", "user_id")
-    VALUES
-      ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);
-  `;
+router.post('/add', rejectUnauthenticated, cloudinaryUpload.single('image'), async (req, res) => {
+  // after image uploads, we have access to req.file
+  console.log('We have an image?', req.file.path);
 
-  // values from new trip info object
-  const queryValues = [req.body.tripName, req.body.startDate,
-  req.body.endDate, req.body.entryPoint, req.body.exitPoint,
-  req.body.longestPortage, req.body.lakes, req.body.tripComments,
-  req.body.cloudinaryImageUrl, req.body.imageDescription, req.user.id];
+  // const queryText = `
+  //   INSERT INTO "trips"
+  //     ("trip_name", "start_date", "end_date", "entry_point", 
+  //     "exit_point", "longest_portage", "lakes", "comments", 
+  //     "image_url", "image_description", "user_id")
+  //   VALUES
+  //     ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);
+  // `;
 
-  pool.query(queryText, queryValues)
-    .then(dbRes => {
-      // send back success
-      res.sendStatus(201);
-    }).catch(dbErr => {
-      console.error('Error in /trips/add POST route', dbErr);
-      res.sendStatus(500);
-    })
+  // // values from new trip info object
+  // const queryValues = [req.body.tripName, req.body.startDate,
+  // req.body.endDate, req.body.entryPoint, req.body.exitPoint,
+  // req.body.longestPortage, req.body.lakes, req.body.tripComments,
+  // req.body.cloudinaryImageUrl, req.body.imageDescription, req.user.id];
+
+  // pool.query(queryText, queryValues)
+  //   .then(dbRes => {
+  //     // send back success
+  //     res.sendStatus(201);
+  //   }).catch(dbErr => {
+  //     console.error('Error in /trips/add POST route', dbErr);
+  //     res.sendStatus(500);
+  //   })
 
 });
 
