@@ -95,7 +95,7 @@ router.post('/add', rejectUnauthenticated, (req, res) => {
   const queryValues = [req.body.tripName, req.body.startDate,
     req.body.endDate, req.body.entryPoint, req.body.exitPoint,
     req.body.longestPortage, req.body.lakes, req.body.tripComments,
-    req.body.imagePath, req.body.imageDescription, req.user.id];
+    req.body.cloudinaryImageUrl, req.body.imageDescription, req.user.id];
 
   pool.query(queryText, queryValues)
     .then(dbRes => {

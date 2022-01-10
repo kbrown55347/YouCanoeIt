@@ -3,8 +3,6 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 // import axios for upload to cloudinary API
 import axios from 'axios';
-//require dotenv - SECURITY
-// require('dotenv').config();
 // MUI imports
 import { Button, TextField, Grid, Box } from '@mui/material';
 // MUI imports for date range picker
@@ -15,10 +13,8 @@ import MobileDateRangePicker from '@mui/lab/MobileDateRangePicker';
 import swal from '@sweetalert/with-react';
 // import css
 import './AddTrip.css';
-// // for getting image from cloudinary
-// import { Image } from 'cloudinary-react';
 // import cloudinary API sensitive info
-import {CLOUDINARY_CLOUD_NAME, CLOUDINARY_UPLOAD_PRESET} from '../../cloudinary_info.js';
+import { CLOUDINARY_CLOUD_NAME, CLOUDINARY_UPLOAD_PRESET } from '../../cloudinary_info.js';
 
 
 function AddTrip() {
@@ -34,7 +30,6 @@ function AddTrip() {
     let [longestPortage, setLongestPortage] = useState('');
     let [lakes, setLakes] = useState('');
     let [tripComments, setTripComments] = useState('');
-    // let [imagePath, setImagePath] = useState('');
     let [imageDescription, setImageDescription] = useState('');
 
     // state to hold image file
@@ -61,8 +56,6 @@ function AddTrip() {
             });
     };
 
-
-
     // handle click of add trip button
     const handleAddTripClick = () => {
 
@@ -76,6 +69,8 @@ function AddTrip() {
             lakes, tripComments, cloudinaryImageUrl,
             imageDescription
         };
+
+        console.log('newTripInfo', newTripInfo);
         // check if fields are filled in
         if (tripName === '' || startDate === '' || endDate === '' ||
             entryPoint === '' || exitPoint === '' || longestPortage === '' ||
@@ -206,31 +201,18 @@ function AddTrip() {
 
                 {/* image upload */}
                 <div>
-                        <input type="file"
-                            onChange={(event) => { setImageSelected(event.target.files[0]) }}
-                        />
-                        <button
+                    <input type="file"
+                        onChange={(event) => { setImageSelected(event.target.files[0]) }}
+                    />
+                    <button
                         onClick={uploadImage}
                     >Upload Image</button>
-                        {/* <Image
-                        cloudName=""
-                        style={{width: 200}}
-                        publicId={cloudinaryPublicId}
-                    /> */}
-                        <img
-                            src={cloudinaryImageUrl}
-                            alt="image"
-                        />
+                    <img
+                        src={cloudinaryImageUrl}
+                        alt="image"
+                    />
                 </div>
 
-                {/* info for image_url */}
-                {/* <TextField
-                    variant="outlined"
-                    value={imagePath}
-                    label='Image URL'
-                    style={{ width: '100%' }}
-                    onChange={(event) => setImagePath(event.target.value)} />
-                <br></br> */}
                 {/* info for image_description */}
                 <TextField
                     variant="outlined"
