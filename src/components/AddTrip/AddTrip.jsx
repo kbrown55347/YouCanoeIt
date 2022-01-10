@@ -32,17 +32,13 @@ function AddTrip() {
     let [tripComments, setTripComments] = useState('');
     let [imageDescription, setImageDescription] = useState('');
 
-    // state to hold image file
+    // states to hold image file & cloudinary url
     const [imageSelected, setImageSelected] = useState('');
     const [cloudinaryImageUrl, setCloudinaryImageUrl] = useState('');
-
-
-
 
     // handle image upload
     const uploadImage = () => {
 
-        // console.log(imageSelected);
         const formData = new FormData();
         // append file we want to work with to form data
         formData.append('file', imageSelected);
@@ -70,7 +66,6 @@ function AddTrip() {
             imageDescription
         };
 
-        console.log('newTripInfo', newTripInfo);
         // check if fields are filled in
         if (tripName === '' || startDate === '' || endDate === '' ||
             entryPoint === '' || exitPoint === '' || longestPortage === '' ||
@@ -199,18 +194,25 @@ function AddTrip() {
                     onChange={(event) => setTripComments(event.target.value)} />
                 <br></br>
 
-                {/* image upload */}
-                <div>
-                    <input type="file"
+                {/* image upload (cloudinary)*/}
+                <div className="img_upload">
+                    <input
+                        className="img_input"
+                        type="file"
                         onChange={(event) => { setImageSelected(event.target.files[0]) }}
                     />
                     <button
+                        className="image_btn"
                         onClick={uploadImage}
                     >Upload Image</button>
-                    <img
+                    <br></br>
+                    {/* // if the cloudinary image url exists, append image to DOM */}
+                    {cloudinaryImageUrl && <img
+                        className="img"
                         src={cloudinaryImageUrl}
                         alt="image"
-                    />
+                    />}
+                    <br></br>
                 </div>
 
                 {/* info for image_description */}

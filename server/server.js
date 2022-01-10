@@ -11,8 +11,6 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 // require in past trips router
 const pastTripsRouter = require ('./routes/trips.router');
-// require in image upload router
-const imageUploadRouter = require ('./routes/image_upload.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
