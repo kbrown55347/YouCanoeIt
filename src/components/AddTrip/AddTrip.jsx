@@ -13,9 +13,6 @@ import MobileDateRangePicker from '@mui/lab/MobileDateRangePicker';
 import swal from '@sweetalert/with-react';
 // import css
 import './AddTrip.css';
-// // import imageUploadForm
-// import ImageUploadForm from '../ImageUploadForm/ImageUploadForm.jsx';
-
 
 function AddTrip() {
 
