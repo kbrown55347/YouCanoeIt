@@ -7,7 +7,6 @@ import tripDetailsSaga from './trip_details.saga';
 import deleteTripSaga from './delete_trip.saga';
 import addNewTripSaga from './add_trip.saga';
 import sendEditedTripSaga from './edit_trip.saga';
-import sendImageUploadSaga from './image_upload.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -26,6 +25,5 @@ export default function* rootSaga() {
     deleteTripSaga(), // delete trip saga
     addNewTripSaga(), // add new trip saga
     sendEditedTripSaga(), // send edited trip info saga
-    sendImageUploadSaga(), // send image upload saga
   ]);
 };

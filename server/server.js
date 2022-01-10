@@ -30,8 +30,6 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 // trips route
 app.use('/api/trips', pastTripsRouter);
-// image_upload route
-app.use('/api/image_upload', imageUploadRouter);
 
 // Serve static files
 app.use(express.static('build'));
