@@ -13,8 +13,8 @@ import MobileDateRangePicker from '@mui/lab/MobileDateRangePicker';
 import swal from '@sweetalert/with-react';
 // import css
 import './AddTrip.css';
-// import cloudinary API sensitive info
-import { CLOUDINARY_CLOUD_NAME, CLOUDINARY_UPLOAD_PRESET } from '../../cloudinary_info.js';
+// import imageUploadForm
+import ImageUploadForm from '../ImageUploadForm/ImageUploadForm.jsx';
 
 
 function AddTrip() {
@@ -33,24 +33,24 @@ function AddTrip() {
     let [imageDescription, setImageDescription] = useState('');
 
     // states to hold image file & cloudinary url
-    const [imageSelected, setImageSelected] = useState('');
-    const [cloudinaryImageUrl, setCloudinaryImageUrl] = useState('');
+    // const [imageSelected, setImageSelected] = useState('');
+    // const [cloudinaryImageUrl, setCloudinaryImageUrl] = useState('');
 
     // handle image upload
-    const uploadImage = () => {
+    // const uploadImage = () => {
 
-        const formData = new FormData();
-        // append file we want to work with to form data
-        formData.append('file', imageSelected);
-        // append cloudinary public upload presets
-        formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-        // make axios POST request to send info to cloudinary w/ endpoint image/upload
-        axios.post(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, formData)
-            .then((response) => {
-                console.log(response.data.url);
-                setCloudinaryImageUrl(response.data.url);
-            });
-    };
+    //     const formData = new FormData();
+    //     // append file we want to work with to form data
+    //     formData.append('file', imageSelected);
+    //     // append cloudinary public upload presets
+    //     formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+    //     // make axios POST request to send info to cloudinary w/ endpoint image/upload
+    //     axios.post(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, formData)
+    //         .then((response) => {
+    //             console.log(response.data.url);
+    //             setCloudinaryImageUrl(response.data.url);
+    //         });
+    // };
 
     // handle click of add trip button
     const handleAddTripClick = () => {
@@ -194,8 +194,11 @@ function AddTrip() {
                     onChange={(event) => setTripComments(event.target.value)} />
                 <br></br>
 
+                {/* Image Upload Form */}
+                <ImageUploadForm />
+
                 {/* image upload (cloudinary)*/}
-                <div className="img_upload">
+                {/* <div className="img_upload">
                     <input
                         className="img_input"
                         type="file"
@@ -205,15 +208,15 @@ function AddTrip() {
                         className="image_btn"
                         onClick={uploadImage}
                     >Upload Image</button>
-                    <br></br>
+                    <br></br> */}
                     {/* // if the cloudinary image url exists, append image to DOM */}
-                    {cloudinaryImageUrl && <img
+                    {/* {cloudinaryImageUrl && <img
                         className="img"
                         src={cloudinaryImageUrl}
                         alt="image"
                     />}
                     <br></br>
-                </div>
+                </div> */}
 
                 {/* info for image_description */}
                 <TextField

@@ -66,6 +66,3 @@ typings/
 
 # ignore package-lock as it complicates merging
 package-lock.json
-
-# ignore cloudinary info file so sensitive information does not get released
-src/cloudinary_info.js
