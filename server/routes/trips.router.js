@@ -15,6 +15,18 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "testing",
+  },
+});
+
+const upload = multer({ storage: storage });
+
+
+
+
 
 
 // This GET route returns logged in users past trips
@@ -63,14 +75,14 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
   // console.log('in details get route', queryValue)
 
   pool.query(queryText, queryValues)
-  .then((dbRes) => {
-    // console.log('In get past trip details', dbRes.rows[0])
-    res.send(dbRes.rows[0]);
-  })
-  .catch((dbErr) => {
-    console.log(dbErr);
-    res.sendStatus(500);
-  });
+    .then((dbRes) => {
+      // console.log('In get past trip details', dbRes.rows[0])
+      res.send(dbRes.rows[0]);
+    })
+    .catch((dbErr) => {
+      console.log(dbErr);
+      res.sendStatus(500);
+    });
 });
 
 
@@ -81,16 +93,18 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
     WHERE "id"=$1 AND "user_id"=$2;
   `;
   const queryValues = [req.params.id, req.user.id];
-pool.query(queryText, queryValues)
-  .then((dbRes)=> {
-    // send back success
-    res.sendStatus(201);
-  })
-  .catch((dbErr) => {
-    console.error('ERROR: DELETE request failed:', dbErr);
-    res.sendStatus(500);
-  })
+  pool.query(queryText, queryValues)
+    .then((dbRes) => {
+      // send back success
+      res.sendStatus(201);
+    })
+    .catch((dbErr) => {
+      console.error('ERROR: DELETE request failed:', dbErr);
+      res.sendStatus(500);
+    })
 });
+
+
 
 
 // POST route to add new trip to db
@@ -107,9 +121,9 @@ router.post('/add', rejectUnauthenticated, (req, res) => {
 
   // values from new trip info object
   const queryValues = [req.body.tripName, req.body.startDate,
-    req.body.endDate, req.body.entryPoint, req.body.exitPoint,
-    req.body.longestPortage, req.body.lakes, req.body.tripComments,
-    req.body.cloudinaryImageUrl, req.body.imageDescription, req.user.id];
+  req.body.endDate, req.body.entryPoint, req.body.exitPoint,
+  req.body.longestPortage, req.body.lakes, req.body.tripComments,
+  req.body.cloudinaryImageUrl, req.body.imageDescription, req.user.id];
 
   pool.query(queryText, queryValues)
     .then(dbRes => {
@@ -142,15 +156,15 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     req.body.imageDescription, req.body.tripId, req.user.id
   ];
 
-pool.query(queryText, queryValues)
-  .then((dbRes)=> {
-    // send back success
-    res.sendStatus(201);
-  })
-  .catch((dbErr) => {
-    console.error('ERROR: PUT request failed:', dbErr);
-    res.sendStatus(500);
-  });
+  pool.query(queryText, queryValues)
+    .then((dbRes) => {
+      // send back success
+      res.sendStatus(201);
+    })
+    .catch((dbErr) => {
+      console.error('ERROR: PUT request failed:', dbErr);
+      res.sendStatus(500);
+    });
 });
 
 

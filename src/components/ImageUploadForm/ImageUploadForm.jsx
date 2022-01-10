@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 function ImageUploadForm() {
-  // const [imageDescription, setImageDescription] = useState('');
   const [imageSelected, setImageSelected] = useState('');
   const dispatch = useDispatch();
 
@@ -19,11 +18,6 @@ function ImageUploadForm() {
       <h3>Image Upload:</h3>
       <form className="uploadForm"
         onSubmit={onImageSubmit}>
-        {/* <input
-          type="text"
-          placeholder="provide a description"
-          value={imageDescription}
-          onChange={(e) => setImageDescription(e.target.value)} /> */}
         <input
           type="file"
           onChange={(e) => setImageSelected(e.target.files[0])} />

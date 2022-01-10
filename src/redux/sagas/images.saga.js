@@ -8,7 +8,7 @@ function* uploadImage(action) {
 
   const imageForm = new FormData();
   // append file we want to work with to form data
-  imageForm.append('image', action.payload.selectedFile);
+  imageForm.append('image', action.payload.imageSelected);
 
   const response = yield axios({
     method: 'POST',
@@ -16,15 +16,15 @@ function* uploadImage(action) {
     headers: headers,
     data: imageForm
   })
-  yield put({
-    type: 'FETCH_IMAGES'
-  })
+  // yield put({
+  //   type: 'FETCH_IMAGES'
+  // })
 };
 
 function* imagesSaga() {
-  yield takeLatest('FETCH_IMAGES', fetchImages);
+  // yield takeLatest('FETCH_IMAGES', fetchImages);
   yield takeLatest('UPLOAD_IMAGE', uploadImage);
-}
+};
 
 
 export default imagesSaga;
