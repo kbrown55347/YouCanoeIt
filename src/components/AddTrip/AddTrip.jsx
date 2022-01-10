@@ -17,6 +17,8 @@ import swal from '@sweetalert/with-react';
 import './AddTrip.css';
 // // for getting image from cloudinary
 // import { Image } from 'cloudinary-react';
+// import cloudinary API sensitive info
+import {CLOUDINARY_CLOUD_NAME, CLOUDINARY_UPLOAD_PRESET} from '../../cloudinary_info.js';
 
 
 function AddTrip() {
@@ -32,32 +34,31 @@ function AddTrip() {
     let [longestPortage, setLongestPortage] = useState('');
     let [lakes, setLakes] = useState('');
     let [tripComments, setTripComments] = useState('');
-    let [imagePath, setImagePath] = useState('');
+    // let [imagePath, setImagePath] = useState('');
     let [imageDescription, setImageDescription] = useState('');
 
     // state to hold image file
     const [imageSelected, setImageSelected] = useState('');
     const [cloudinaryImageUrl, setCloudinaryImageUrl] = useState('');
+
+
+
+
     // handle image upload
     const uploadImage = () => {
-        // dispatch image info
-        dispatch({
-            type: 'SEND_IMAGE_UPLOAD',
-            payload: imageSelected
-        });
+
         // console.log(imageSelected);
-        // make API request to cloudinary
-        // const formData = new FormData();
-        // // append file we want to work with to form data
-        // formData.append('file', imageSelected);
-        // // append cloudinary public upload presets
-        // formData.append('upload_preset', 'process.env.CLOUDINARY_UPLOAD_PRESET');
-        // // make axios POST request to send info to cloudinary w/ endpoint image/upload
-        // axios.post(`https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload`, formData)
-        //     .then((response) => {
-        //         console.log(response.data.url);
-        //         setCloudinaryImageUrl(response.data.url);
-        //     });
+        const formData = new FormData();
+        // append file we want to work with to form data
+        formData.append('file', imageSelected);
+        // append cloudinary public upload presets
+        formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+        // make axios POST request to send info to cloudinary w/ endpoint image/upload
+        axios.post(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, formData)
+            .then((response) => {
+                console.log(response.data.url);
+                setCloudinaryImageUrl(response.data.url);
+            });
     };
 
 
@@ -72,13 +73,13 @@ function AddTrip() {
         const newTripInfo = {
             tripName, startDate, endDate,
             entryPoint, exitPoint, longestPortage,
-            lakes, tripComments, imagePath,
+            lakes, tripComments, cloudinaryImageUrl,
             imageDescription
         };
         // check if fields are filled in
         if (tripName === '' || startDate === '' || endDate === '' ||
             entryPoint === '' || exitPoint === '' || longestPortage === '' ||
-            lakes === '' || tripComments === '' || imagePath === '' ||
+            lakes === '' || tripComments === '' || cloudinaryImageUrl === '' ||
             imageDescription === '') {
             alert('Please fill out all information fields to add trip.');
         } else {
@@ -119,7 +120,7 @@ function AddTrip() {
 
             <Grid
                 container
-                direction="column"
+                direction="row"
                 justifyContent="space-evenly"
                 alignItems="center"
             >
