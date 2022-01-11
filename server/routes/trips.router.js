@@ -36,7 +36,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     SELECT "id", "trip_name", 
       TO_CHAR("start_date",'MM-DD-YYYY') AS "start_date", 
       TO_CHAR("end_date",'MM-DD-YYYY') AS "end_date", 
-      "image_url", "user_id" FROM "trips"
+      "image_url", "user_id" 
+    FROM "trips"
     WHERE "user_id"=$1
     ORDER BY "start_date" DESC;
     `;
