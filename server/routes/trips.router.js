@@ -61,7 +61,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
       TO_CHAR("start_date",'MM-DD-YYYY') AS "start_date", 
       TO_CHAR("end_date",'MM-DD-YYYY') AS "end_date", 
       "entry_point", "exit_point", "longest_portage", 
-      "lakes", "comments", "image_url", "image_description"
+      "lakes", "comments", "image_url"
     FROM "trips"
     WHERE "id"=$1 AND "user_id"=$2;
   `
@@ -135,16 +135,15 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     UPDATE "trips"
     SET "trip_name"=$1, "start_date"=$2, "end_date"=$3, 
       "entry_point"=$4, "exit_point"=$5, "longest_portage"=$6, 
-      "lakes"=$7, "comments"=$8,
-      "image_url"=$9, "image_description"=$10
-    WHERE "id"=$11 AND "user_id"=$12;
+      "lakes"=$7, "comments"=$8, "image_url"=$9
+    WHERE "id"=$10 AND "user_id"=$11;
   `;
 
   const queryValues = [
     req.body.tripName, req.body.startDate, req.body.endDate,
     req.body.entryPoint, req.body.exitPoint, req.body.longestPortage,
-    req.body.lakes, req.body.tripComments, req.body.imagePath,
-    req.body.imageDescription, req.body.tripId, req.user.id
+    req.body.lakes, req.body.tripComments, req.body.imagePath, 
+    req.body.tripId, req.user.id
   ];
 
   pool.query(queryText, queryValues)

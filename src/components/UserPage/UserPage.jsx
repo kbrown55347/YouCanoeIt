@@ -1,6 +1,5 @@
 import React from 'react';
-import LogOutButton from '../LogOutButton/LogOutButton';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import TripItem from '../TripItem/TripItem';
@@ -13,7 +12,6 @@ function UserPage() {
   // to access reducers in this component
   const user = useSelector((store) => store.user);
   const pastTrips = useSelector(store => store.pastTrips);
-
   const dispatch = useDispatch();
   const history = useHistory();
 

@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-// import axios for upload to cloudinary API
-import axios from 'axios';
 // MUI imports
 import { Button, TextField, Grid, Box } from '@mui/material';
 // MUI imports for date range picker
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import MobileDateRangePicker from '@mui/lab/MobileDateRangePicker';
-// sweetalert imports
-import swal from '@sweetalert/with-react';
 // import to reformat date to send to db
 import { format } from 'date-fns';
-// import css
+// sweetalert imports
+import swal from '@sweetalert/with-react';
+// import css page
 import './AddTrip.css';
 
 function AddTrip() {
@@ -28,12 +26,12 @@ function AddTrip() {
     const [longestPortage, setLongestPortage] = useState('');
     const [lakes, setLakes] = useState('');
     const [tripComments, setTripComments] = useState('');
-    // const [imageDescription, setImageDescription] = useState('');
     // for image upload
     const [selectedFile, setSelectedFile] = useState('');
+
     // handle click of add trip button
     const handleAddTripClick = (e) => {
-        // because we are using a form
+        // prevent form from submitting, need to perform other actions first
         e.preventDefault();
         // need to reformat dates in order to send to db
         const startDateToFormat = tripDateRange[0];
@@ -51,18 +49,10 @@ function AddTrip() {
             dispatch({
                 type: 'ADD_NEW_TRIP',
                 payload: {
-                    tripName,
-                    startDate,
-                    endDate,
-                    entryPoint,
-                    exitPoint,
-                    longestPortage,
-                    lakes,
-                    tripComments,
-                    selectedFile
+                    tripName, startDate, endDate, entryPoint, exitPoint,
+                    longestPortage, lakes, tripComments, selectedFile
                 }
             });
-
             // trip added confirmation alert
             swal({
                 text: "Your trip has been added!",
@@ -182,15 +172,9 @@ function AddTrip() {
                 {/* image upload */}
                 <form className="uploadForm"
                     onSubmit={handleAddTripClick}>
-                    {/* <input
-                        type="text"
-                        placeholder="provide a description"
-                        value={imageDescription}
-                        onChange={(e) => setImageDescription(e.target.value)} /> */}
                     <input
                         type="file"
                         onChange={(e) => setSelectedFile(e.target.files[0])} />
-
                     {/* // if image has been selected by user, append preview to DOM */}
                     {selectedFile && <img
                         className="img"
@@ -198,48 +182,9 @@ function AddTrip() {
                         alt="image"
                     />}
                     <br></br>
-
                     <button>Add Trip</button>
-                    {/* <Button
-                    variant="contained"
-                    style={{ backgroundColor: '#a1b26a', color: 'white' }}
-                    // onClick={handleAddTripClick}
-                >
-                    Add Trip
-                </Button> */}
-
                 </form>
 
-                {/* image upload (cloudinary)*/}
-                {/* <div className="img_upload">
-                    <input
-                        className="img_input"
-                        type="file"
-                        onChange={(event) => { setImageSelected(event.target.files[0]) }}
-                    />
-                    <button
-                        className="image_btn"
-                        onClick={uploadImage}
-                    >Upload Image</button>
-                    <br></br> */}
-                {/* // if the cloudinary image url exists, append image to DOM */}
-                {/* {cloudinaryImageUrl && <img
-                        className="img"
-                        src={cloudinaryImageUrl}
-                        alt="image"
-                    />}
-                    <br></br>
-                </div> */}
-
-                {/* info for image_description */}
-                {/* <TextField
-                        variant="outlined"
-                        type='text' multiline rows={2}
-                        value={imageDescription}
-                        label='Image Description'
-                        style={{ width: '100%' }}
-                        onChange={(event) => setImageDescription(event.target.value)} />
-                    <br></br> */}
             </Grid>
 
             <Grid
@@ -248,13 +193,6 @@ function AddTrip() {
                 justifyContent="space-evenly"
                 alignItems="center"
             >
-                {/* <Button
-                    variant="contained"
-                    style={{ backgroundColor: '#a1b26a', color: 'white' }}
-                    onClick={handleAddTripClick}>
-                    Add Trip
-                </Button> */}
-
                 <Button
                     variant="contained"
                     style={{ backgroundColor: 'white', color: 'black' }}
