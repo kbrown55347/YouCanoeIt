@@ -98,38 +98,33 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
-
-
-
 // POST route to add new trip to db
 router.post('/add', rejectUnauthenticated, cloudinaryUpload.single('image'), async (req, res) => {
-  // after image uploads, we have access to req.file
-  console.log('We have an image?', req.file.path);
+  // after image uploads, we have access to cloudinary image url in req.file.path
+  console.log(req.body.startDate)
+  // SQL query text
+  const queryText = `
+    INSERT INTO "trips"
+      ("trip_name", "start_date", "end_date", "entry_point", 
+      "exit_point", "longest_portage", "lakes", "comments", 
+      "image_url", "user_id")
+    VALUES
+      ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);
+  `;
+  // SQL query values with trip info
+  const queryValues = [req.body.tripName, req.body.startDate,
+  req.body.endDate, req.body.entryPoint, req.body.exitPoint,
+  req.body.longestPortage, req.body.lakes, req.body.tripComments,
+  req.file.path, req.user.id];
 
-  // const queryText = `
-  //   INSERT INTO "trips"
-  //     ("trip_name", "start_date", "end_date", "entry_point", 
-  //     "exit_point", "longest_portage", "lakes", "comments", 
-  //     "image_url", "image_description", "user_id")
-  //   VALUES
-  //     ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);
-  // `;
-
-  // // values from new trip info object
-  // const queryValues = [req.body.tripName, req.body.startDate,
-  // req.body.endDate, req.body.entryPoint, req.body.exitPoint,
-  // req.body.longestPortage, req.body.lakes, req.body.tripComments,
-  // req.body.cloudinaryImageUrl, req.body.imageDescription, req.user.id];
-
-  // pool.query(queryText, queryValues)
-  //   .then(dbRes => {
-  //     // send back success
-  //     res.sendStatus(201);
-  //   }).catch(dbErr => {
-  //     console.error('Error in /trips/add POST route', dbErr);
-  //     res.sendStatus(500);
-  //   })
-
+  pool.query(queryText, queryValues)
+    .then(dbRes => {
+      // send back success
+      res.sendStatus(201);
+    }).catch(dbErr => {
+      console.error('Error in /trips/add POST route', dbErr);
+      res.sendStatus(500);
+    })
 });
 
 /* PUT route to update trip in DB with edited info, only if 
