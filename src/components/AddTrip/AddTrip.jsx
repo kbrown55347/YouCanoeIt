@@ -20,7 +20,6 @@ function AddTrip() {
 
     const dispatch = useDispatch();
     const history = useHistory();
-
     // local states to collect trip info
     const [tripName, setTripName] = useState('');
     const [tripDateRange, setTripDateRange] = useState([null, null]);
@@ -42,50 +41,36 @@ function AddTrip() {
         const startDate = format(startDateToFormat, 'yyyy/MM/dd');
         const endDate = format(endDateToFormat, 'yyyy/MM/dd');
 
-        // send dispatch to add new trip saga with trip information
-        dispatch({
-            type: 'ADD_NEW_TRIP',
-            payload: {
-                tripName,
-                startDate,
-                endDate,
-                entryPoint,
-                exitPoint,
-                longestPortage,
-                lakes,
-                tripComments,
-                selectedFile
-            }
-        });
-
-        // // bundle new trip into object
-        // const newTripInfo = {
-        //     tripName, startDate, endDate,
-        //     entryPoint, exitPoint, longestPortage,
-        //     lakes, tripComments, cloudinaryImageUrl,
-        //     imageDescription
-        // };
-
         // check if fields are filled in
-        // if (tripName === '' || startDate === '' || endDate === '' ||
-        //     entryPoint === '' || exitPoint === '' || longestPortage === '' ||
-        //     lakes === '' || tripComments === '' || cloudinaryImageUrl === '' ||
-        //     imageDescription === '') {
-        //     alert('Please fill out all information fields to add trip.');
-        // } else {
-        //     // dispatch object
-        //     dispatch({
-        //         type: 'ADD_NEW_TRIP',
-        //         payload: newTripInfo
-        //     });
+        if (tripName === '' || startDate === '' || endDate === '' ||
+            entryPoint === '' || exitPoint === '' || longestPortage === '' ||
+            lakes === '' || tripComments === '' || selectedFile === '') {
+            alert('Please fill out all information fields to add trip.');
+        } else {
+            // send dispatch to add new trip saga with trip information
+            dispatch({
+                type: 'ADD_NEW_TRIP',
+                payload: {
+                    tripName,
+                    startDate,
+                    endDate,
+                    entryPoint,
+                    exitPoint,
+                    longestPortage,
+                    lakes,
+                    tripComments,
+                    selectedFile
+                }
+            });
 
-        // trip added confirmation alert
-        // swal({
-        //     text: "Your trip has been added!",
-        //     icon: "success",
-        // });
-        // // send user to user page
-        // history.push('/user');
+            // trip added confirmation alert
+            swal({
+                text: "Your trip has been added!",
+                icon: "success",
+            });
+            // send user to user page
+            history.push('/user');
+        }
     }; // end handleAddTripClick
 
     return (

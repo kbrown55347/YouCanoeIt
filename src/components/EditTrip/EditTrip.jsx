@@ -124,14 +124,13 @@ function EditTrip() {
         let lakes = tripDetails.lakes;
         let tripComments = tripDetails.comments;
         let imagePath = tripDetails.image_url;
-        let imageDescription = tripDetails.image_description;
+        // let imageDescription = tripDetails.image_description;
 
         // bundle trip edits into object
         const tripEdits = {
             tripId, tripName, startDate, endDate,
             entryPoint, exitPoint, longestPortage,
-            lakes, tripComments, imagePath,
-            imageDescription
+            lakes, tripComments, imagePath
         };
         // dispatch object to saga function
         dispatch({
@@ -276,16 +275,16 @@ function EditTrip() {
                 />
                 <br></br>
                 {/* info for image_url */}
-                <TextField
+                {/* <TextField
                     variant="outlined"
                     value={tripDetails.image_url || ''}
                     label='Image URL'
                     style={{ width: '100%' }}
                     onChange={handleImageUrlChange}
                 />
-                <br></br>
+                <br></br> */}
                 {/* info for image_description */}
-                <TextField
+                {/* <TextField
                     variant="outlined"
                     type='text' multiline rows={2}
                     value={tripDetails.image_description || ''}
@@ -293,7 +292,7 @@ function EditTrip() {
                     style={{ width: '100%' }}
                     onChange={handleImageDescriptionChange}
                 />
-                <br></br>
+                <br></br> */}
             </Grid>
 
             <Grid
