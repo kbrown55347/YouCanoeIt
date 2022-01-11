@@ -29,22 +29,24 @@ function AddTrip() {
     // for image upload
     const [selectedFile, setSelectedFile] = useState('');
 
-    // handle click of add trip button
-    const handleAddTripClick = (e) => {
-        // prevent form from submitting, need to perform other actions first
-        e.preventDefault();
-        // need to reformat dates in order to send to db
-        const startDateToFormat = tripDateRange[0];
-        const endDateToFormat = tripDateRange[1];
-        const startDate = format(startDateToFormat, 'yyyy/MM/dd');
-        const endDate = format(endDateToFormat, 'yyyy/MM/dd');
+    // assign start and end date values from tripDateRange state
+    const startDateToFormat = tripDateRange[0];
+    const endDateToFormat = tripDateRange[1];
 
-        // check if fields are filled in
-        if (tripName === '' || startDate === '' || endDate === '' ||
+    // handle click of add trip button
+    const handleAddTripClick = () => {
+
+        // check if information fields are filled in
+        if (tripName === '' || startDateToFormat === '' || endDateToFormat === '' ||
             entryPoint === '' || exitPoint === '' || longestPortage === '' ||
-            lakes === '' || tripComments === '' || selectedFile === '') {
-            alert('Please fill out all information fields to add trip.');
+            lakes === '' || tripComments === '') {
+            alert('Please fill out all information fields.');
+        } else if (selectedFile === '') {
+            alert('Please upload a trip image.');
         } else {
+            // reformat dates in order to send to db
+            const startDate = format(startDateToFormat, 'yyyy/MM/dd');
+            const endDate = format(endDateToFormat, 'yyyy/MM/dd');
             // send dispatch to add new trip saga with trip information
             dispatch({
                 type: 'ADD_NEW_TRIP',
@@ -66,6 +68,7 @@ function AddTrip() {
     return (
         <div className="container">
             <h2 className="page-title">Add Trip</h2>
+            <p className="header">Trip Information</p>
 
             <Grid
                 container
@@ -170,8 +173,8 @@ function AddTrip() {
                 <br></br>
 
                 {/* image upload */}
-                <form className="uploadForm"
-                    onSubmit={handleAddTripClick}>
+                <p className="header">Trip Image</p>
+                <div className="img_input">
                     <input
                         type="file"
                         onChange={(e) => setSelectedFile(e.target.files[0])} />
@@ -181,9 +184,7 @@ function AddTrip() {
                         src={URL.createObjectURL(selectedFile)}
                         alt="image"
                     />}
-                    <br></br>
-                    <button>Add Trip</button>
-                </form>
+                </div>
 
             </Grid>
 
@@ -193,6 +194,12 @@ function AddTrip() {
                 justifyContent="space-evenly"
                 alignItems="center"
             >
+                <Button
+                    variant="contained"
+                    style={{ backgroundColor: '#a1b26a', color: 'black' }}
+                    onClick={handleAddTripClick}>
+                    Add Trip
+                </Button>
                 <Button
                     variant="contained"
                     style={{ backgroundColor: 'white', color: 'black' }}

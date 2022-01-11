@@ -101,7 +101,6 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 // POST route to add new trip to db
 router.post('/add', rejectUnauthenticated, cloudinaryUpload.single('image'), async (req, res) => {
   // after image uploads, we have access to cloudinary image url in req.file.path
-  console.log(req.body.startDate)
   // SQL query text
   const queryText = `
     INSERT INTO "trips"
