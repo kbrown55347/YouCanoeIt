@@ -1,9 +1,13 @@
 ## To Do:
 
 
-### Date Selector
-- [x] add date selector feature to add trip page
-- [x] add date selector feature to edit trip page
+### Image Upload
+[ ] create saga function to axios trigger POST /image_upload route
+[ ] wire image_upload route to axios POST image to cloudinary
+[ ] create redux to store cloudinary url
+[ ] dispatch uploaded image data to saga function
+[ ] import redux w/ cloudinary image url
+[ ] 
 
 ### Trip Item
 - Trip Details Page

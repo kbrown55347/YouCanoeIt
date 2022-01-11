@@ -22,6 +22,5 @@ CREATE TABLE "trips" (
 	"lakes" VARCHAR (1000),
 	"comments" VARCHAR (1000),
 	"image_url" VARCHAR,
-	"image_description" VARCHAR (1000), 
 	"user_id" INT REFERENCES "user"
 );

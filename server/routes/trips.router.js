@@ -2,6 +2,26 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+// for cloudinary upload
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const multer = require("multer");
+require('dotenv').config();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "YouCanoeIt",
+  },
+});
+
+const cloudinaryUpload = multer({ storage: storage });
 
 // This GET route returns logged in users past trips
 router.get('/', rejectUnauthenticated, (req, res) => {
@@ -41,7 +61,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
       TO_CHAR("start_date",'MM-DD-YYYY') AS "start_date", 
       TO_CHAR("end_date",'MM-DD-YYYY') AS "end_date", 
       "entry_point", "exit_point", "longest_portage", 
-      "lakes", "comments", "image_url", "image_description"
+      "lakes", "comments", "image_url"
     FROM "trips"
     WHERE "id"=$1 AND "user_id"=$2;
   `
@@ -49,14 +69,14 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
   // console.log('in details get route', queryValue)
 
   pool.query(queryText, queryValues)
-  .then((dbRes) => {
-    // console.log('In get past trip details', dbRes.rows[0])
-    res.send(dbRes.rows[0]);
-  })
-  .catch((dbErr) => {
-    console.log(dbErr);
-    res.sendStatus(500);
-  });
+    .then((dbRes) => {
+      // console.log('In get past trip details', dbRes.rows[0])
+      res.send(dbRes.rows[0]);
+    })
+    .catch((dbErr) => {
+      console.log(dbErr);
+      res.sendStatus(500);
+    });
 });
 
 
@@ -67,35 +87,35 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
     WHERE "id"=$1 AND "user_id"=$2;
   `;
   const queryValues = [req.params.id, req.user.id];
-pool.query(queryText, queryValues)
-  .then((dbRes)=> {
-    // send back success
-    res.sendStatus(201);
-  })
-  .catch((dbErr) => {
-    console.error('ERROR: DELETE request failed:', dbErr);
-    res.sendStatus(500);
-  })
+  pool.query(queryText, queryValues)
+    .then((dbRes) => {
+      // send back success
+      res.sendStatus(201);
+    })
+    .catch((dbErr) => {
+      console.error('ERROR: DELETE request failed:', dbErr);
+      res.sendStatus(500);
+    })
 });
 
-
 // POST route to add new trip to db
-router.post('/add', rejectUnauthenticated, (req, res) => {
-  // console.log('in trips/add POST', req.body);
+router.post('/add', rejectUnauthenticated, cloudinaryUpload.single('image'), async (req, res) => {
+  // after image uploads, we have access to cloudinary image url in req.file.path
+  console.log(req.body.startDate)
+  // SQL query text
   const queryText = `
     INSERT INTO "trips"
       ("trip_name", "start_date", "end_date", "entry_point", 
       "exit_point", "longest_portage", "lakes", "comments", 
-      "image_url", "image_description", "user_id")
+      "image_url", "user_id")
     VALUES
-      ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);
+      ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);
   `;
-
-  // values from new trip info object
+  // SQL query values with trip info
   const queryValues = [req.body.tripName, req.body.startDate,
-    req.body.endDate, req.body.entryPoint, req.body.exitPoint,
-    req.body.longestPortage, req.body.lakes, req.body.tripComments,
-    req.body.imagePath, req.body.imageDescription, req.user.id];
+  req.body.endDate, req.body.entryPoint, req.body.exitPoint,
+  req.body.longestPortage, req.body.lakes, req.body.tripComments,
+  req.file.path, req.user.id];
 
   pool.query(queryText, queryValues)
     .then(dbRes => {
@@ -105,7 +125,6 @@ router.post('/add', rejectUnauthenticated, (req, res) => {
       console.error('Error in /trips/add POST route', dbErr);
       res.sendStatus(500);
     })
-
 });
 
 /* PUT route to update trip in DB with edited info, only if 
@@ -116,27 +135,26 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     UPDATE "trips"
     SET "trip_name"=$1, "start_date"=$2, "end_date"=$3, 
       "entry_point"=$4, "exit_point"=$5, "longest_portage"=$6, 
-      "lakes"=$7, "comments"=$8,
-      "image_url"=$9, "image_description"=$10
-    WHERE "id"=$11 AND "user_id"=$12;
+      "lakes"=$7, "comments"=$8, "image_url"=$9
+    WHERE "id"=$10 AND "user_id"=$11;
   `;
 
   const queryValues = [
     req.body.tripName, req.body.startDate, req.body.endDate,
     req.body.entryPoint, req.body.exitPoint, req.body.longestPortage,
-    req.body.lakes, req.body.tripComments, req.body.imagePath,
-    req.body.imageDescription, req.body.tripId, req.user.id
+    req.body.lakes, req.body.tripComments, req.body.imagePath, 
+    req.body.tripId, req.user.id
   ];
 
-pool.query(queryText, queryValues)
-  .then((dbRes)=> {
-    // send back success
-    res.sendStatus(201);
-  })
-  .catch((dbErr) => {
-    console.error('ERROR: PUT request failed:', dbErr);
-    res.sendStatus(500);
-  });
+  pool.query(queryText, queryValues)
+    .then((dbRes) => {
+      // send back success
+      res.sendStatus(201);
+    })
+    .catch((dbErr) => {
+      console.error('ERROR: PUT request failed:', dbErr);
+      res.sendStatus(500);
+    });
 });
 
 

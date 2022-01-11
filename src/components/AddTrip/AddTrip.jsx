@@ -7,52 +7,51 @@ import { Button, TextField, Grid, Box } from '@mui/material';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import MobileDateRangePicker from '@mui/lab/MobileDateRangePicker';
+// import to reformat date to send to db
+import { format } from 'date-fns';
 // sweetalert imports
 import swal from '@sweetalert/with-react';
-// import css
+// import css page
 import './AddTrip.css';
-
 
 function AddTrip() {
 
     const dispatch = useDispatch();
     const history = useHistory();
-
     // local states to collect trip info
-    let [tripName, setTripName] = useState('');
-    let [tripDateRange, setTripDateRange] = useState([null, null]);
-    let [entryPoint, setEntryPoint] = useState('');
-    let [exitPoint, setExitPoint] = useState('');
-    let [longestPortage, setLongestPortage] = useState('');
-    let [lakes, setLakes] = useState('');
-    let [tripComments, setTripComments] = useState('');
-    let [imagePath, setImagePath] = useState('');
-    let [imageDescription, setImageDescription] = useState('');
+    const [tripName, setTripName] = useState('');
+    const [tripDateRange, setTripDateRange] = useState([null, null]);
+    const [entryPoint, setEntryPoint] = useState('');
+    const [exitPoint, setExitPoint] = useState('');
+    const [longestPortage, setLongestPortage] = useState('');
+    const [lakes, setLakes] = useState('');
+    const [tripComments, setTripComments] = useState('');
+    // for image upload
+    const [selectedFile, setSelectedFile] = useState('');
 
     // handle click of add trip button
-    const handleAddTripClick = () => {
+    const handleAddTripClick = (e) => {
+        // prevent form from submitting, need to perform other actions first
+        e.preventDefault();
+        // need to reformat dates in order to send to db
+        const startDateToFormat = tripDateRange[0];
+        const endDateToFormat = tripDateRange[1];
+        const startDate = format(startDateToFormat, 'yyyy/MM/dd');
+        const endDate = format(endDateToFormat, 'yyyy/MM/dd');
 
-        let startDate = tripDateRange[0];
-        let endDate = tripDateRange[1];
-
-        // bundle new trip into object
-        const newTripInfo = {
-            tripName, startDate, endDate,
-            entryPoint, exitPoint, longestPortage,
-            lakes, tripComments, imagePath,
-            imageDescription
-        };
         // check if fields are filled in
         if (tripName === '' || startDate === '' || endDate === '' ||
             entryPoint === '' || exitPoint === '' || longestPortage === '' ||
-            lakes === '' || tripComments === '' || imagePath === '' ||
-            imageDescription === '') {
+            lakes === '' || tripComments === '' || selectedFile === '') {
             alert('Please fill out all information fields to add trip.');
         } else {
-            // dispatch object
+            // send dispatch to add new trip saga with trip information
             dispatch({
                 type: 'ADD_NEW_TRIP',
-                payload: newTripInfo
+                payload: {
+                    tripName, startDate, endDate, entryPoint, exitPoint,
+                    longestPortage, lakes, tripComments, selectedFile
+                }
             });
             // trip added confirmation alert
             swal({
@@ -61,7 +60,7 @@ function AddTrip() {
             });
             // send user to user page
             history.push('/user');
-        };
+        }
     }; // end handleAddTripClick
 
     return (
@@ -86,7 +85,7 @@ function AddTrip() {
 
             <Grid
                 container
-                direction="column"
+                direction="row"
                 justifyContent="space-evenly"
                 alignItems="center"
             >
@@ -110,8 +109,6 @@ function AddTrip() {
                 </LocalizationProvider>
             </Grid>
             <br></br>
-
-
 
             <Grid
                 container
@@ -171,23 +168,23 @@ function AddTrip() {
                     style={{ width: '100%' }}
                     onChange={(event) => setTripComments(event.target.value)} />
                 <br></br>
-                {/* info for image_url */}
-                <TextField
-                    variant="outlined"
-                    value={imagePath}
-                    label='Image URL'
-                    style={{ width: '100%' }}
-                    onChange={(event) => setImagePath(event.target.value)} />
-                <br></br>
-                {/* info for image_description */}
-                <TextField
-                    variant="outlined"
-                    type='text' multiline rows={2}
-                    value={imageDescription}
-                    label='Image Description'
-                    style={{ width: '100%' }}
-                    onChange={(event) => setImageDescription(event.target.value)} />
-                <br></br>
+
+                {/* image upload */}
+                <form className="uploadForm"
+                    onSubmit={handleAddTripClick}>
+                    <input
+                        type="file"
+                        onChange={(e) => setSelectedFile(e.target.files[0])} />
+                    {/* // if image has been selected by user, append preview to DOM */}
+                    {selectedFile && <img
+                        className="img"
+                        src={URL.createObjectURL(selectedFile)}
+                        alt="image"
+                    />}
+                    <br></br>
+                    <button>Add Trip</button>
+                </form>
+
             </Grid>
 
             <Grid
@@ -196,13 +193,6 @@ function AddTrip() {
                 justifyContent="space-evenly"
                 alignItems="center"
             >
-                <Button
-                    variant="contained"
-                    style={{ backgroundColor: '#a1b26a', color: 'white' }}
-                    onClick={handleAddTripClick}>
-                    Add Trip
-                </Button>
-
                 <Button
                     variant="contained"
                     style={{ backgroundColor: 'white', color: 'black' }}

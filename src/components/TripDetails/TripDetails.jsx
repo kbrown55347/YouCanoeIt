@@ -12,8 +12,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 // sweetalert imports
 import swal from '@sweetalert/with-react';
-
-// import css
+// import css page
 import './TripDetails.css';
 
 // for MUI delete confirmation alert
@@ -95,17 +94,16 @@ function TripDetails() {
             {/* trip details info */}
             <div key={tripDetails.id}>
                 <h4>{tripDetails.trip_name}</h4>
-                <p>Dates: {tripDetails.start_date} to {tripDetails.end_date}</p>
-                <p>Entry Point: {tripDetails.entry_point} & Exit Point: {tripDetails.exit_point}</p>
-                <p>Longest Portage: {tripDetails.longest_portage}</p>
-                <p>Lakes: {tripDetails.lakes}</p>
-                <p>Trip Comments: {tripDetails.comments}</p>
                 <img
                     src={tripDetails.image_url}
                     alt='trip image'
                 >
                 </img>
-                <p>{tripDetails.image_description}</p>
+                <p>Dates: {tripDetails.start_date} to {tripDetails.end_date}</p>
+                <p>Entry Point: {tripDetails.entry_point} & Exit Point: {tripDetails.exit_point}</p>
+                <p>Longest Portage: {tripDetails.longest_portage}</p>
+                <p>Lakes: {tripDetails.lakes}</p>
+                <p>Trip Comments: {tripDetails.comments}</p>
 
                 {/* buttons */}
                 <Grid
@@ -158,7 +156,6 @@ function TripDetails() {
                 </Grid>
 
             </div>
-
         </div >
     )
 };

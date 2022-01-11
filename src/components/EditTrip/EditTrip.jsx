@@ -13,6 +13,9 @@ import swal from '@sweetalert/with-react'
 function EditTrip() {
     const dispatch = useDispatch();
     const history = useHistory();
+    const params = useParams();
+    /* access trip details reducer */
+    const tripDetails = useSelector(store => store.tripDetails);
 
     // on page load fetch trip details for trip to edit
     useEffect(() => {
@@ -22,11 +25,6 @@ function EditTrip() {
             payload: params.id
         })
     }, []);
-
-    /* access trip details reducer */
-    const tripDetails = useSelector(store => store.tripDetails);
-
-    const params = useParams();
 
     // handle trip name change
     const handleTripNameChange = (event) => {
@@ -41,7 +39,6 @@ function EditTrip() {
         // separate values and assign to variables
         let startDate = values[0];
         let endDate = values[1];
-
         // dispatch to reducer, send start date
         dispatch({
             type: 'EDIT_START_DATE',
@@ -94,44 +91,26 @@ function EditTrip() {
         });
     };
 
-    // handle image url change
-    const handleImageUrlChange = (event) => {
-        dispatch({
-            type: 'EDIT_IMAGE_URL',
-            payload: event.target.value
-        });
-    };
-
-    // handle image description change
-    const handleImageDescriptionChange = (event) => {
-        dispatch({
-            type: 'EDIT_IMAGE_DESCRIPTION',
-            payload: event.target.value
-        });
-    };
-
     // handle click of save button
     const handleSaveClick = () => {
 
         // store reducer info in variables
-        let tripId = tripDetails.id;
-        let tripName = tripDetails.trip_name;
-        let startDate = tripDetails.start_date;
-        let endDate = tripDetails.end_date;
-        let entryPoint = tripDetails.entry_point;
-        let exitPoint = tripDetails.exit_point;
-        let longestPortage = tripDetails.longest_portage;
-        let lakes = tripDetails.lakes;
-        let tripComments = tripDetails.comments;
-        let imagePath = tripDetails.image_url;
-        let imageDescription = tripDetails.image_description;
+        const tripId = tripDetails.id;
+        const tripName = tripDetails.trip_name;
+        const startDate = tripDetails.start_date;
+        const endDate = tripDetails.end_date;
+        const entryPoint = tripDetails.entry_point;
+        const exitPoint = tripDetails.exit_point;
+        const longestPortage = tripDetails.longest_portage;
+        const lakes = tripDetails.lakes;
+        const tripComments = tripDetails.comments;
+        const imagePath = tripDetails.image_url;
 
         // bundle trip edits into object
         const tripEdits = {
             tripId, tripName, startDate, endDate,
             entryPoint, exitPoint, longestPortage,
-            lakes, tripComments, imagePath,
-            imageDescription
+            lakes, tripComments, imagePath
         };
         // dispatch object to saga function
         dispatch({
@@ -143,7 +122,7 @@ function EditTrip() {
             text: "Your trip details have been updated!",
             icon: "success",
         });
-        // clear reducer
+        // clear trip details reducer
         dispatch({
             type: 'CLEAR_TRIP_DETAILS'
         });
@@ -155,7 +134,7 @@ function EditTrip() {
     const handleCancelClick = () => {
         // send user back to details page for trip
         history.push(`/trip_details/${tripDetails.id}`);
-        // clear reducer
+        // clear trip details reducer
         dispatch({
             type: 'CLEAR_TRIP_DETAILS'
         });
@@ -164,7 +143,7 @@ function EditTrip() {
     return (
         <div className="container">
 
-            <h2 className="page-title">Edit Trip</h2>
+            <h2 className="page-title">Edit Trip Info</h2>
 
             <Grid
                 container
@@ -275,25 +254,6 @@ function EditTrip() {
                     onChange={handleCommentsChange}
                 />
                 <br></br>
-                {/* info for image_url */}
-                <TextField
-                    variant="outlined"
-                    value={tripDetails.image_url || ''}
-                    label='Image URL'
-                    style={{ width: '100%' }}
-                    onChange={handleImageUrlChange}
-                />
-                <br></br>
-                {/* info for image_description */}
-                <TextField
-                    variant="outlined"
-                    type='text' multiline rows={2}
-                    value={tripDetails.image_description || ''}
-                    label='Image Description'
-                    style={{ width: '100%' }}
-                    onChange={handleImageDescriptionChange}
-                />
-                <br></br>
             </Grid>
 
             <Grid
@@ -317,7 +277,6 @@ function EditTrip() {
                 >
                     Cancel
                 </Button>
-
             </Grid>
 
         </div>
