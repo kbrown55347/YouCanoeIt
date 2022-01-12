@@ -3,9 +3,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* sticky and top: 0 so header stays at top 
+  of page but doesn't cover other material */
   position: sticky;
   top: 0;
   width: 100%;
+  /* z-index so MUI elements scroll under header */
+  z-index: 2;
+  /* shadow effect */
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
   margin: 0 0 30px;
   background-color: #d4915e;
   overflow: hidden;
