@@ -1,0 +1,26 @@
+.card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  text-align: center;
+  padding: 0.5em;
+  margin: 2.5em 0;
+  background-color: white;
+  border-radius: 0.5em;
+}
+
+.card img {
+  width: 90%;
+  height: auto;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 0.5em auto 1em;
+}
+
+td {
+  border: 1px solid #68453A;
+  padding: 0.5rem;
+  text-align: left;
+}

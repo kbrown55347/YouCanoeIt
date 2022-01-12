@@ -215,7 +215,7 @@ function AddTrip() {
             >
                 <Button
                     variant="contained"
-                    style={{ backgroundColor: '#a1b26a', color: 'black' }}
+                    style={{ backgroundColor: '#68453A', color: 'white' }}
                     onClick={handleAddTripClick}>
                     Add Trip
                 </Button>
