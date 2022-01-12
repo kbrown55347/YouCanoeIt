@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 function AddTrip() {
 
-    // to change background color of MUI textfields
+    // to change background color of MUI text fields
     const classes = useStyles();
 
     const dispatch = useDispatch();

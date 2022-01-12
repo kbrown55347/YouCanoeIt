@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 // MUI imports
 import { Button, TextField, Grid, Box } from '@mui/material';
+import { makeStyles } from '@material-ui/core/styles';
 // MUI imports for date range picker
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -10,7 +11,19 @@ import MobileDateRangePicker from '@mui/lab/MobileDateRangePicker';
 // sweetalert imports
 import swal from '@sweetalert/with-react'
 
+// to change background color of MUI text fields
+const useStyles = makeStyles((theme) => ({
+    root: {
+        background: 'white'
+    },
+}));
+
+
 function EditTrip() {
+
+    // to change background color of MUI text fields
+    const classes = useStyles();
+
     const dispatch = useDispatch();
     const history = useHistory();
     const params = useParams();
@@ -155,6 +168,7 @@ function EditTrip() {
                 {/* info for trip_name */}
                 <TextField
                     variant="outlined"
+                    className={classes.root}
                     type='text'
                     value={tripDetails.trip_name || ''}
                     label='Trip Name'
@@ -183,9 +197,11 @@ function EditTrip() {
                         }}
                         renderInput={(startProps, endProps) => (
                             <React.Fragment>
-                                <TextField {...startProps} />
+                                <TextField {...startProps}
+                                    className={classes.root} />
                                 <Box sx={{ mx: 1 }}> to </Box>
-                                <TextField {...endProps} />
+                                <TextField {...endProps}
+                                    className={classes.root} />
                             </React.Fragment>
                         )}
                     />
@@ -202,6 +218,7 @@ function EditTrip() {
                 {/* info for entry_point */}
                 <TextField
                     variant="outlined"
+                    className={classes.root}
                     type='text'
                     value={tripDetails.entry_point || ''}
                     label='Entry Point'
@@ -212,6 +229,7 @@ function EditTrip() {
                 {/* info for exit_point */}
                 <TextField
                     variant="outlined"
+                    className={classes.root}
                     type='text'
                     value={tripDetails.exit_point || ''}
                     label='Exit Point'
@@ -229,6 +247,7 @@ function EditTrip() {
                 {/* info for longest_portage */}
                 <TextField
                     variant="outlined"
+                    className={classes.root}
                     type='text'
                     value={tripDetails.longest_portage || ''}
                     label='Longest Portage'
@@ -239,6 +258,7 @@ function EditTrip() {
                 {/* info for lakes */}
                 <TextField
                     variant="outlined"
+                    className={classes.root}
                     type='text' multiline rows={2}
                     value={tripDetails.lakes || ''}
                     label='Lakes Traveled'
@@ -249,6 +269,7 @@ function EditTrip() {
                 {/* info for comments */}
                 <TextField
                     variant="outlined"
+                    className={classes.root}
                     type='text' multiline rows={2}
                     value={tripDetails.comments || ''}
                     label='Trip Comments'
