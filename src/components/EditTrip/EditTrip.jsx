@@ -141,8 +141,8 @@ function EditTrip() {
         dispatch({
             type: 'CLEAR_TRIP_DETAILS'
         });
-        // send user to user page
-        history.push('/user');
+        // send user back to details page for trip
+        history.push(`/trip_details/${tripDetails.id}`);
     };
 
     // handle click of cancel button
