@@ -2,6 +2,8 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 // MUI imports
 import { Button } from '@mui/material';
+// import css
+import './TripItem.css';
 
 
 function TripItem({ trip }) {
@@ -9,10 +11,9 @@ function TripItem({ trip }) {
   const history = useHistory();
 
   return (
-    <div className="trip_list_item">
+    <div className="card">
       <h4>{trip.trip_name}</h4>
-      <p>{trip.start_date} to {trip.end_date}</p>
-
+      <p className="dates">Dates: {trip.start_date} to {trip.end_date}</p>
       <img
         src={trip.image_url}
         alt='trip image'

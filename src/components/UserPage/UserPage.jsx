@@ -17,7 +17,9 @@ function UserPage() {
 
   // on page load fetch past trips
   useEffect(() => {
-    dispatch({ type: 'FETCH_PAST_TRIPS' })
+    dispatch({ type: 'FETCH_PAST_TRIPS' });
+    // start at top of page
+    window.scrollTo(0, 0);
   }, []);
 
   return (
