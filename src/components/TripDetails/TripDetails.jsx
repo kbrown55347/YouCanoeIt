@@ -36,7 +36,7 @@ function TripDetails() {
             payload: params.id
         });
         // start at top of page
-        // window.scrollTo(0, 0);
+        window.scrollTo(0, 0);
     }, []);
 
     // for MUI delete confirmation alert
@@ -92,12 +92,6 @@ function TripDetails() {
                 >
                 </img>
 
-                {/* <p>Dates: {tripDetails.start_date} to {tripDetails.end_date}</p>
-                <p>Entry Point: {tripDetails.entry_point} & Exit Point: {tripDetails.exit_point}</p>
-                <p>Longest Portage: {tripDetails.longest_portage}</p>
-                <p>Lakes: {tripDetails.lakes}</p>
-                <p>Trip Comments: {tripDetails.comments}</p> */}
-
                 <table>
                     <tbody>
                         <tr>
@@ -120,7 +114,6 @@ function TripDetails() {
                         </tr>
                     </tbody>
                 </table>
-
 
             </div>
             {/* buttons */}
