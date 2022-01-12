@@ -23,7 +23,9 @@ function EditTrip() {
         dispatch({
             type: 'FETCH_TRIP_DETAILS',
             payload: params.id
-        })
+        });
+        // start at top of page
+        window.scrollTo(0, 0);
     }, []);
 
     // handle trip name change
@@ -264,7 +266,7 @@ function EditTrip() {
             >
                 <Button
                     variant="contained"
-                    style={{ backgroundColor: '#a1b26a', color: 'white' }}
+                    style={{ backgroundColor: '#a1b26a', color: 'black' }}
                     onClick={handleSaveClick}
                 >
                     Save

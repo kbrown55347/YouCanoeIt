@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 // MUI imports
 import { Button, TextField, Grid, Box } from '@mui/material';
+import { makeStyles } from '@material-ui/core/styles';
 // MUI imports for date range picker
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -14,7 +15,17 @@ import swal from '@sweetalert/with-react';
 // import css page
 import './AddTrip.css';
 
+// to change background color of MUI text fields
+const useStyles = makeStyles((theme) => ({
+    root: {
+        background: 'white'
+    },
+}));
+
 function AddTrip() {
+
+    // to change background color of MUI textfields
+    const classes = useStyles();
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -78,6 +89,7 @@ function AddTrip() {
                 {/* info for trip_name */}
                 <TextField
                     variant="outlined"
+                    className={classes.root}
                     type='text'
                     value={tripName}
                     label='Trip Name'
@@ -103,9 +115,11 @@ function AddTrip() {
                         }}
                         renderInput={(startProps, endProps) => (
                             <React.Fragment>
-                                <TextField {...startProps} />
+                                <TextField {...startProps}
+                                    className={classes.root} />
                                 <Box sx={{ mx: 1 }}> to </Box>
-                                <TextField {...endProps} />
+                                <TextField {...endProps}
+                                    className={classes.root} />
                             </React.Fragment>
                         )}
                     />
@@ -122,6 +136,7 @@ function AddTrip() {
                 {/* info for entry_point */}
                 <TextField
                     variant="outlined"
+                    className={classes.root}
                     type='text'
                     value={entryPoint}
                     label='Entry Point'
@@ -131,6 +146,7 @@ function AddTrip() {
                 {/* info for exit_point */}
                 <TextField
                     variant="outlined"
+                    className={classes.root}
                     type='text'
                     value={exitPoint}
                     label='Exit Point'
@@ -147,6 +163,7 @@ function AddTrip() {
                 {/* info for longest_portage */}
                 <TextField
                     variant="outlined"
+                    className={classes.root}
                     type='text'
                     value={longestPortage}
                     label='Longest Portage'
@@ -156,6 +173,7 @@ function AddTrip() {
                 {/* info for lakes */}
                 <TextField
                     variant="outlined"
+                    className={classes.root}
                     type='text' multiline rows={2}
                     value={lakes}
                     label='Lakes Traveled'
@@ -165,6 +183,7 @@ function AddTrip() {
                 {/* info for comments */}
                 <TextField
                     variant="outlined"
+                    className={classes.root}
                     type='text' multiline rows={2}
                     value={tripComments}
                     label='Trip Comments'

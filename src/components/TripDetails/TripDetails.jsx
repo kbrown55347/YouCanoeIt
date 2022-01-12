@@ -34,7 +34,9 @@ function TripDetails() {
         dispatch({
             type: 'FETCH_TRIP_DETAILS',
             payload: params.id
-        })
+        });
+        // start at top of page
+        window.scrollTo(0, 0);
     }, []);
 
     // for MUI delete confirmation alert
@@ -90,7 +92,7 @@ function TripDetails() {
         <div className="container">
 
             <h2 className="page-title">Trip Details</h2>
-            
+
             {/* trip details info */}
             <div key={tripDetails.id}>
                 <h4>{tripDetails.trip_name}</h4>
@@ -121,7 +123,7 @@ function TripDetails() {
                     </Button>
                     <Button
                         variant="contained"
-                        style={{ backgroundColor: '#a1b26a', color: 'white' }}
+                        style={{ backgroundColor: '#a1b26a', color: 'black' }}
                         onClick={handleEditClick}
                     >
                         Edit
@@ -130,7 +132,7 @@ function TripDetails() {
                     {/* delete button and MUI delete confirmation alert */}
                     <Button
                         variant="contained"
-                        style={{ backgroundColor: '#e0857c', color: 'white' }}
+                        style={{ backgroundColor: '#e0857c', color: 'black' }}
                         onClick={handleClickOpen}>
                         Delete
                     </Button>
