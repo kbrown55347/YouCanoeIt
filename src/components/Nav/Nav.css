@@ -3,7 +3,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  position: sticky;
+  top: 0;
+  width: 100%;
   margin: 0 0 30px;
   background-color: #d4915e;
   overflow: hidden;
