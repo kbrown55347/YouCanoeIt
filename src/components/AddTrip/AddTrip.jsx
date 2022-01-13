@@ -44,6 +44,17 @@ function AddTrip() {
     const startDateToFormat = tripDateRange[0];
     const endDateToFormat = tripDateRange[1];
 
+    // for presentation, on click of Trip Information
+    // fill state with trip data
+    const handleTripInfoClick = () => {
+        setTripName('First BW Adventure');
+        setEntryPoint('64');
+        setExitPoint('64');
+        setLongestPortage('52 rods');
+        setLakes('East Bearskin, Alder, Canoe');
+        setTripComments('First trip to the Boundary Waters ever! Went with Katie and Steve Michurski. Caught lots of fish.');
+    }; // end handleTripInfoClick
+
     // handle click of add trip button
     const handleAddTripClick = () => {
 
@@ -79,7 +90,10 @@ function AddTrip() {
     return (
         <div className="container">
             <h2 className="page-title">Add Trip</h2>
-            <p className="header">Trip Information</p>
+            <p
+                className="header"
+                onClick={handleTripInfoClick}>
+                Trip Information</p>
 
             <Grid
                 container
