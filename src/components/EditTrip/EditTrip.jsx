@@ -287,7 +287,7 @@ function EditTrip() {
             >
                 <Button
                     variant="contained"
-                    style={{ backgroundColor: '#68453A', color: 'FEFEFA' }}
+                    style={{ backgroundColor: '#68453A', color: '#FEFEFA' }}
                     onClick={handleSaveClick}
                 >
                     Save
@@ -295,7 +295,7 @@ function EditTrip() {
 
                 <Button
                     variant="contained"
-                    style={{ backgroundColor: 'FEFEFA', color: 'black' }}
+                    style={{ backgroundColor: '#FEFEFA', color: 'black' }}
                     onClick={handleCancelClick}
                 >
                     Cancel
