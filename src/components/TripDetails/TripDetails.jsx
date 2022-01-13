@@ -96,22 +96,22 @@ function TripDetails() {
                 <table>
                     <tbody>
                         <tr>
-                            <td colspan="2">Dates: <em>{tripDetails.start_date}</em> to <em>{tripDetails.end_date}</em></td>
+                            <td colSpan="2">Dates: <em>{tripDetails.start_date}</em> to <em>{tripDetails.end_date}</em></td>
                         </tr>
                         <tr>
-                            <td colspan="2">Entry Point: <em>{tripDetails.entry_point}</em></td>
+                            <td colSpan="2">Entry Point: <em>{tripDetails.entry_point}</em></td>
                         </tr>
                         <tr>
-                            <td colspan="2">Exit Point: <em>{tripDetails.exit_point}</em></td>
+                            <td colSpan="2">Exit Point: <em>{tripDetails.exit_point}</em></td>
                         </tr>
                         <tr>
-                            <td colspan="2">Longest Portage: <em>{tripDetails.longest_portage}</em></td>
+                            <td colSpan="2">Longest Portage: <em>{tripDetails.longest_portage}</em></td>
                         </tr>
                         <tr>
-                            <td colspan="2">Lakes: <em>{tripDetails.lakes}</em></td>
+                            <td colSpan="2">Lakes: <em>{tripDetails.lakes}</em></td>
                         </tr>
                         <tr>
-                            <td colspan="2">Comments: <em>{tripDetails.comments}</em></td>
+                            <td colSpan="2">Comments: <em>{tripDetails.comments}</em></td>
                         </tr>
                     </tbody>
                 </table>

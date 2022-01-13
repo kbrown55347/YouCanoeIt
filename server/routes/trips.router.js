@@ -35,8 +35,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   // using TO_CHAR for start and end dates to format dates as MM-DD-YYYY w/out timestamp
   queryText = `
     SELECT "id", "trip_name", 
-      TO_CHAR("start_date",'MM-DD-YYYY') AS "start_date", 
-      TO_CHAR("end_date",'MM-DD-YYYY') AS "end_date", 
+      TO_CHAR("start_date",'YYYY-MM-DD') AS "start_date", 
+      TO_CHAR("end_date",'YYYY-MM-DD') AS "end_date", 
       "image_url", "user_id" 
     FROM "trips"
     WHERE "user_id"=$1
