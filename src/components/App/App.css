@@ -7,6 +7,7 @@ body,
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
+  background-color: #FAFAEF;
 }
 
 img {
@@ -14,9 +15,9 @@ img {
   max-width: 100%;
 }
 
-/* .page-title {
+.page-title {
   text-align: center;
-} */
+}
 
 /* --------------------------------------------------------------------------------
 Container
@@ -33,11 +34,11 @@ Button
 .btn {
   display: inline-block;
   padding: 10px 20px;
-  border-color: #293819;
+  border-color: #171a15;
   border-width: 1px 1px 3px;
   border-radius: 4px;
-  background-color: #8fa253;
-  color: #f8f8f8;
+  background-color: #68453A;
+  color: #FEFEFA;
   font-size: 1.1rem;
   outline: 0;
   cursor: pointer;
@@ -59,7 +60,7 @@ Button
 }
 
 .btn:hover {
-  background-color: #293819;
+  background-color: #A0A0A0;
   text-decoration: none;
 }
 
@@ -89,7 +90,7 @@ Alert
   padding: 15px 10px;
   margin: 15px 0;
   border: 2px solid #e01616;
-  background-color: #efefef;
+  background-color: #FEFEFA;
   border-radius: 3px;
   color: #e01616;
   font-size: 0.8rem;
@@ -104,7 +105,7 @@ Form Treatment
   max-width: 100%;
   padding: 1em;
   margin: 1em;
-  background-color: #efefef;
+  background-color: #FEFEFA;
   border-radius: 3px;
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
 }

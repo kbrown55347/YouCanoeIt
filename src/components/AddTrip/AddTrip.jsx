@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 // MUI imports
 import { Button, TextField, Grid, Box } from '@mui/material';
+import { makeStyles } from '@material-ui/core/styles';
 // MUI imports for date range picker
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -14,7 +15,17 @@ import swal from '@sweetalert/with-react';
 // import css page
 import './AddTrip.css';
 
+// to change background color of MUI text fields
+const useStyles = makeStyles((theme) => ({
+    root: {
+        background: 'white'
+    },
+}));
+
 function AddTrip() {
+
+    // to change background color of MUI text fields
+    const classes = useStyles();
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -29,22 +40,24 @@ function AddTrip() {
     // for image upload
     const [selectedFile, setSelectedFile] = useState('');
 
-    // handle click of add trip button
-    const handleAddTripClick = (e) => {
-        // prevent form from submitting, need to perform other actions first
-        e.preventDefault();
-        // need to reformat dates in order to send to db
-        const startDateToFormat = tripDateRange[0];
-        const endDateToFormat = tripDateRange[1];
-        const startDate = format(startDateToFormat, 'yyyy/MM/dd');
-        const endDate = format(endDateToFormat, 'yyyy/MM/dd');
+    // assign start and end date values from tripDateRange state
+    const startDateToFormat = tripDateRange[0];
+    const endDateToFormat = tripDateRange[1];
 
-        // check if fields are filled in
-        if (tripName === '' || startDate === '' || endDate === '' ||
+    // handle click of add trip button
+    const handleAddTripClick = () => {
+
+        // check if information fields are filled in
+        if (tripName === '' || startDateToFormat === '' || endDateToFormat === '' ||
             entryPoint === '' || exitPoint === '' || longestPortage === '' ||
-            lakes === '' || tripComments === '' || selectedFile === '') {
-            alert('Please fill out all information fields to add trip.');
+            lakes === '' || tripComments === '') {
+            alert('Please fill out all information fields.');
+        } else if (selectedFile === '') {
+            alert('Please upload a trip image.');
         } else {
+            // reformat dates in order to send to db
+            const startDate = format(startDateToFormat, 'yyyy/MM/dd');
+            const endDate = format(endDateToFormat, 'yyyy/MM/dd');
             // send dispatch to add new trip saga with trip information
             dispatch({
                 type: 'ADD_NEW_TRIP',
@@ -66,6 +79,7 @@ function AddTrip() {
     return (
         <div className="container">
             <h2 className="page-title">Add Trip</h2>
+            <p className="header">Trip Information</p>
 
             <Grid
                 container
@@ -75,6 +89,7 @@ function AddTrip() {
                 {/* info for trip_name */}
                 <TextField
                     variant="outlined"
+                    className={classes.root}
                     type='text'
                     value={tripName}
                     label='Trip Name'
@@ -100,9 +115,11 @@ function AddTrip() {
                         }}
                         renderInput={(startProps, endProps) => (
                             <React.Fragment>
-                                <TextField {...startProps} />
+                                <TextField {...startProps}
+                                    className={classes.root} />
                                 <Box sx={{ mx: 1 }}> to </Box>
-                                <TextField {...endProps} />
+                                <TextField {...endProps}
+                                    className={classes.root} />
                             </React.Fragment>
                         )}
                     />
@@ -119,6 +136,7 @@ function AddTrip() {
                 {/* info for entry_point */}
                 <TextField
                     variant="outlined"
+                    className={classes.root}
                     type='text'
                     value={entryPoint}
                     label='Entry Point'
@@ -128,6 +146,7 @@ function AddTrip() {
                 {/* info for exit_point */}
                 <TextField
                     variant="outlined"
+                    className={classes.root}
                     type='text'
                     value={exitPoint}
                     label='Exit Point'
@@ -144,6 +163,7 @@ function AddTrip() {
                 {/* info for longest_portage */}
                 <TextField
                     variant="outlined"
+                    className={classes.root}
                     type='text'
                     value={longestPortage}
                     label='Longest Portage'
@@ -153,6 +173,7 @@ function AddTrip() {
                 {/* info for lakes */}
                 <TextField
                     variant="outlined"
+                    className={classes.root}
                     type='text' multiline rows={2}
                     value={lakes}
                     label='Lakes Traveled'
@@ -162,6 +183,7 @@ function AddTrip() {
                 {/* info for comments */}
                 <TextField
                     variant="outlined"
+                    className={classes.root}
                     type='text' multiline rows={2}
                     value={tripComments}
                     label='Trip Comments'
@@ -170,8 +192,8 @@ function AddTrip() {
                 <br></br>
 
                 {/* image upload */}
-                <form className="uploadForm"
-                    onSubmit={handleAddTripClick}>
+                <p className="header">Trip Image</p>
+                <div className="img_input">
                     <input
                         type="file"
                         onChange={(e) => setSelectedFile(e.target.files[0])} />
@@ -181,9 +203,7 @@ function AddTrip() {
                         src={URL.createObjectURL(selectedFile)}
                         alt="image"
                     />}
-                    <br></br>
-                    <button>Add Trip</button>
-                </form>
+                </div>
 
             </Grid>
 
@@ -193,6 +213,12 @@ function AddTrip() {
                 justifyContent="space-evenly"
                 alignItems="center"
             >
+                <Button
+                    variant="contained"
+                    style={{ backgroundColor: '#68453A', color: 'white' }}
+                    onClick={handleAddTripClick}>
+                    Add Trip
+                </Button>
                 <Button
                     variant="contained"
                     style={{ backgroundColor: 'white', color: 'black' }}

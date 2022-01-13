@@ -9,18 +9,11 @@
   border-radius: 0.5em;
 }
 
+.dates {
+  font-style: italic;
+}
+
 .card img {
-  width: 90%;
+  width: 80%;
   height: auto;
-}
-
-table {
-  border-collapse: collapse;
-  margin: 0.5em auto 1em;
-}
-
-td {
-  border: 1px solid #68453A;
-  padding: 0.5rem;
-  text-align: left;
 }

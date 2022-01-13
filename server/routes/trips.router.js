@@ -9,6 +9,7 @@ const multer = require("multer");
 require('dotenv').config();
 
 cloudinary.config({
+  // cloudinary personal account information
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
@@ -36,7 +37,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     SELECT "id", "trip_name", 
       TO_CHAR("start_date",'MM-DD-YYYY') AS "start_date", 
       TO_CHAR("end_date",'MM-DD-YYYY') AS "end_date", 
-      "image_url", "user_id" FROM "trips"
+      "image_url", "user_id" 
+    FROM "trips"
     WHERE "user_id"=$1
     ORDER BY "start_date" DESC;
     `;
@@ -70,7 +72,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 
   pool.query(queryText, queryValues)
     .then((dbRes) => {
-      // console.log('In get past trip details', dbRes.rows[0])
+      console.log('In get past trip details', dbRes.rows[0])
       res.send(dbRes.rows[0]);
     })
     .catch((dbErr) => {
@@ -101,7 +103,6 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 // POST route to add new trip to db
 router.post('/add', rejectUnauthenticated, cloudinaryUpload.single('image'), async (req, res) => {
   // after image uploads, we have access to cloudinary image url in req.file.path
-  console.log(req.body.startDate)
   // SQL query text
   const queryText = `
     INSERT INTO "trips"
