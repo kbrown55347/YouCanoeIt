@@ -184,7 +184,7 @@ function AddTrip() {
                 <TextField
                     variant="outlined"
                     className={classes.root}
-                    type='text' multiline rows={2}
+                    type='text' multiline rows={3}
                     value={tripComments}
                     label='Trip Comments'
                     style={{ width: '100%' }}
