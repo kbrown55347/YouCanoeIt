@@ -22,7 +22,7 @@ function TripItem({ trip }) {
       <br></br>
       <Button
         variant="contained"
-        style={{ backgroundColor: '#68453A', color: 'white' }}
+        style={{ backgroundColor: '#68453A', color: '#FEFEFA' }}
         // send user to trip details page on click of View Details button
         onClick={() => {
           history.push(`/trip_details/${trip.id}`);

@@ -14,7 +14,7 @@ import swal from '@sweetalert/with-react'
 // to change background color of MUI text fields
 const useStyles = makeStyles((theme) => ({
     root: {
-        background: 'white'
+        background: '#FEFEFA'
     },
 }));
 
@@ -27,7 +27,7 @@ function EditTrip() {
     const dispatch = useDispatch();
     const history = useHistory();
     const params = useParams();
-    /* access trip details reducer */
+    // access trip details reducer
     const tripDetails = useSelector(store => store.tripDetails);
 
     // on page load fetch trip details for trip to edit
@@ -287,7 +287,7 @@ function EditTrip() {
             >
                 <Button
                     variant="contained"
-                    style={{ backgroundColor: '#68453A', color: 'white' }}
+                    style={{ backgroundColor: '#68453A', color: 'FEFEFA' }}
                     onClick={handleSaveClick}
                 >
                     Save
@@ -295,7 +295,7 @@ function EditTrip() {
 
                 <Button
                     variant="contained"
-                    style={{ backgroundColor: 'white', color: 'black' }}
+                    style={{ backgroundColor: 'FEFEFA', color: 'black' }}
                     onClick={handleCancelClick}
                 >
                     Cancel

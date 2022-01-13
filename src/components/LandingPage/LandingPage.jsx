@@ -31,7 +31,7 @@ function LandingPage() {
         <p>Already a Member?</p>
         <Button
           variant="contained"
-          style={{ backgroundColor: '#68453A', color: 'white' }}
+          style={{ backgroundColor: '#68453A', color: '#FEFEFA' }}
           onClick={onLogin}
         >Login</Button>
       </Grid>
@@ -46,7 +46,7 @@ function LandingPage() {
         <p>New Member?</p>
         <Button
           variant="contained"
-          style={{ backgroundColor: '#68453A', color: 'white' }}
+          style={{ backgroundColor: '#68453A', color: '#FEFEFA' }}
           onClick={onRegister}
         >Register</Button>
       </Grid>

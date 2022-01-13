@@ -25,7 +25,7 @@ function TripDetails() {
     const history = useHistory();
     // useParams so detail page is aware of clicked item
     const params = useParams();
-    // console.log('******** PARAMS:', params);
+    // access trip details reducer
     const tripDetails = useSelector(store => store.tripDetails);
 
     // on page load fetch clicked trip details
@@ -92,6 +92,7 @@ function TripDetails() {
                 >
                 </img>
 
+                {/* bulk of trip info displayed in table */}
                 <table>
                     <tbody>
                         <tr>
@@ -125,7 +126,7 @@ function TripDetails() {
             >
                 <Button
                     variant="contained"
-                    style={{ backgroundColor: '#68453A', color: 'white' }}
+                    style={{ backgroundColor: '#68453A', color: '#FEFEFA' }}
                     onClick={handleEditClick}
                 >
                     Edit
@@ -134,7 +135,7 @@ function TripDetails() {
                 {/* delete button and MUI delete confirmation alert */}
                 <Button
                     variant="contained"
-                    style={{ backgroundColor: 'white', color: 'black' }}
+                    style={{ backgroundColor: '#FEFEFA', color: 'black' }}
                     onClick={handleClickOpen}>
                     Delete
                 </Button>
