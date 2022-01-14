@@ -12,7 +12,7 @@ function TripItem({ trip }) {
 
   return (
     <div className="card">
-      <h4>{trip.trip_name}</h4>
+      <p className="trip_title">{trip.trip_name}</p>
       <p className="dates">Dates: {trip.start_date} to {trip.end_date}</p>
       <img
         src={trip.image_url}

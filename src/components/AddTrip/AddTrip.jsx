@@ -208,9 +208,9 @@ function AddTrip() {
                 {/* image upload */}
                 <p className="header">Trip Image</p>
                 <div className="img_input">
-                    <input
-                        type="file"
-                        onChange={(e) => setSelectedFile(e.target.files[0])} />
+                        <input
+                            type="file"
+                            onChange={(e) => setSelectedFile(e.target.files[0])} />
                     {/* // if image has been selected by user, append preview to DOM */}
                     {selectedFile && <img
                         className="img"
