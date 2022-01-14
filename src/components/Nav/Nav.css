@@ -22,6 +22,7 @@
 }
 
 .nav-title {
+  font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;
   font-size: 22px;
   font-weight: 700;
   color: #FEFEFA;
@@ -30,6 +31,7 @@
 }
 
 .navLink {
+  font-family: Georgia, Times, Times New Roman, serif;
   display: inline-block;
   color: #FEFEFA;
   background-color: #d4915e;
