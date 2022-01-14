@@ -18,6 +18,9 @@ img {
 .page-title {
   text-align: center;
 }
+.trip_title {
+  font-weight: bold;
+}
 
 /* --------------------------------------------------------------------------------
 Container

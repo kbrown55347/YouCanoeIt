@@ -85,7 +85,7 @@ function TripDetails() {
 
             {/* trip details info */}
             <div key={tripDetails.id} className="card">
-                <h4>{tripDetails.trip_name}</h4>
+                <p className="trip_title">{tripDetails.trip_name}</p>
                 <img
                     src={tripDetails.image_url}
                     alt='trip image'

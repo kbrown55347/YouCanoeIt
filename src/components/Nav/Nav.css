@@ -25,7 +25,7 @@
   font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;
   font-size: 22px;
   font-weight: 700;
-  color: #FEFEFA;
+  color: #4a321d;
   padding-left: 10px;
   margin: 0;
 }
@@ -33,7 +33,7 @@
 .navLink {
   font-family: Georgia, Times, Times New Roman, serif;
   display: inline-block;
-  color: #FEFEFA;
+  color: #4a321d;
   background-color: #d4915e;
   text-align: center;
   padding: 24px 10px;
