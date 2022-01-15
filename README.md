@@ -1,130 +1,64 @@
+# YouCanoeIt
 
-# EDA Project
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+YouCanoeIt is a mobile-first application that provides a place for people to document their adventures to the Boundary Waters Canoe Area Wilderness (BWCAW). Users can create a profile where they are able to add, view, edit, and delete information about trips taken to the BWCAW. They can then refer back to these trips when planning for upcoming ones, when sharing suggestions and experiences with others, or when simply feeling nostalgic! YouCanoeIt is a CRUD application that I designed and created from start to finish.
 
-We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
+![Working Image](/public/past_trips.gif)
 
-## Use the Template for This Repository (Don't Clone)
-
-- Don't Fork or Clone. Instead, click the `Use this Template` button, and make a copy to your personal account.
-
+## Getting Started
+---
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ## Prerequisites
-
 Before you get started, make sure you have the following software installed on your computer:
-
 - [Node.js](https://nodejs.org/en/)
-- [PostrgeSQL](https://www.postgresql.org/)
-- [Nodemon](https://nodemon.io/)
+- [PostgreSQL](https://www.postgresql.org/download/)
 
-## Create database and table
+## Installation
 
-Create a new database called `prime_app` and create a `user` table:
-
-```SQL
-CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
-);
-```
-
-If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
-
-## Development Setup Instructions
-
-- Run `npm install`
+- Create a database named `you_canoe_it`.
+- The queries in the `database.sql` file are setup to create and populate the necessary tables to allow this application to run correctly. The project is built on [PostgreSQL](https://www.postgresql.org/download/), so you will need to have that installed. I recommend using [Postico](https://eggerapps.at/postico/) to run the queries.
 - Create a `.env` file at the root of the project and paste this line into the file:
   ```
   SERVER_SESSION_SECRET=superDuperSecret
   ```
-  While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
+  While you're in your new `.env` file, replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
+- To access the image storage feature of the project, you will need to get a free [Cloudinary](https://cloudinary.com/users/register/free) account. For "Select a product," choose "Programmable Media...".
+- In your Cloudinary account, click the dashboard tab and grab your Cloudinary cloud name, API key and API secret.
+- Paste the following lines of code into the `.env` file replacing yourName, yourKey and yourSecret with your Cloudinary values:
+```
+CLOUDINARY_CLOUD_NAME=yourName
+CLOUDINARY_API_KEY=yourKey
+CLOUDINARY_API_SECRET=yourSecret
+```
+- Run `npm install`
 - Start postgres if not running already by using `brew services start postgresql`
+- Running the server code requires `nodemon`. If you don't already have `nodemon`, install it globally with `npm install nodemon --global`. 
 - Run `npm run server`
 - Run `npm run client`
 - Navigate to `localhost:3000`
 
-## Debugging
+## Usage
 
-To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run client`. Start the debugging server by selecting the Debug button.
+1. When you get to the landing page of the account, click REGISTER to create an account. If you already have one then click LOGIN.
 
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
+2. On the home page, click the ADD TRIP button. Fill out your trip information and upload a trip image. Click ADD TRIP to add this trip to your account.
 
-Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
+3. To view details about a specific trip, click the VIEW DETAILS button. In the details section, you can edit the trip information by clicking the EDIT button or delete the trip from your account by clicking DELETE.
 
-![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
+4. To return back to the home page at any point and to view your past trips, click Home in the navbar.
 
-## Testing Routes with Postman
-
-To use Postman with this repo, you will need to set up requests in Postman to register a user and login a user at a minimum.
-
-Keep in mind that once you using the login route, Postman will manage your session cookie for you just like a browser, ensuring it is sent with each subsequent request. If you delete the `localhost` cookie in Postman, it will effectively log you out.
-
-1. Start the server - `npm run server`
-2. Import the sample routes JSON file [v2](./PostmanPrimeSoloRoutesv2.json) by clicking `Import` in Postman. Select the file.
-3. Click `Collections` and `Send` the following three calls in order:
-   1. `POST /api/user/register` registers a new user, see body to change username/password
-   2. `POST /api/user/login` will login a user, see body to change username/password
-   3. `GET /api/user` will get user information, by default it's not very much
-
-After running the login route above, you can try any other route you've created that requires a logged in user!
-
-## Production Build
-
-Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
-
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm start`
-- Navigate to `localhost:5000`
-
-## Lay of the Land
-
-There are a few videos linked below that show a walkthrough the client and sever setup to help acclimatize to the boilerplate. Please take some time to watch the videos in order to get a better understanding of what the boilerplate is like.
-
-- [Initial Set](https://vimeo.com/453297271)
-- [Server Walkthrough](https://vimeo.com/453297212)
-- [Client Walkthrough](https://vimeo.com/453297124)
-
-Directory Structure:
-
-- `src/` contains the React application
-- `public/` contains static assets for the client-side
-- `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site
-- `server/` contains the Express App
-
-This code is also heavily commented. We recommend reading through the comments, getting a lay of the land, and becoming comfortable with how the code works before you start making too many changes. If you're wondering where to start, consider reading through component file comments in the following order:
-
-- src/components
-  - App/App
-  - Footer/Footer
-  - Nav/Nav
-  - AboutPage/AboutPage
-  - InfoPage/InfoPage
-  - UserPage/UserPage
-  - LoginPage/LoginPage
-  - RegisterPage/RegisterPage
-  - LogOutButton/LogOutButton
-  - ProtectedRoute/ProtectedRoute
-
-## Deployment
-
-1. Create a new Heroku project
-1. Link the Heroku project to the project GitHub Repo
-1. Create an Heroku Postgres database
-1. Connect to the Heroku Postgres database from Postico
-1. Create the necessary tables
-1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
-1. In the deploy section, select manual deploy
-
-## Update Documentation
-
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
+5. To log out, simply click Log Out in the navbar.
 
 
+## Built With
 
+HTML, CSS, Node.js, Express.js, Passport, React, MUI React, Redux, Cloudinary, PostgreSQL, Heroku
 
+<a href="https://nodejs.org/en/"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg" height="40px" width="40px" /></a><a href="https://material-ui.com/"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/materialui/materialui-original.svg" height="40px" width="40px" /></a><a href="https://reactjs.org/"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" height="40px" width="40px" /></a><a href="https://redux.js.org/"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" height="40px" width="40px" /></a><a href="https://www.postgresql.org/"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg" height="40px" width="40px" /></a><a href="https://www.heroku.com/"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/heroku/heroku-original.svg" height="40px" width="40px" /></a>
 
+## Acknowledgment
+Thank you to Prime Digital Academy, my instructor Matthew Black, and my classmates who helped me to create this application. And thank you to everyone on the internet who created helpful documentation and video tutorials on using Cloudinary.
 
-### YouCanoeIt Readme
+## Contacts
 
-- npm install, database setup (you_canoe_it), .env file & password salting and hashing, 
+<a href="https://www.linkedin.com/in/kelsey-brown-3a3792a8"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a>  <a href="mailto:kbrown55347@gmail.com"><img src=https://raw.githubusercontent.com/johnturner4004/readme-generator/master/src/components/assets/images/email_me_button_icon_151852.svg /></a>
