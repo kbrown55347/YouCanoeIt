@@ -50,6 +50,7 @@ CLOUDINARY_API_SECRET=yourSecret
 
 5. To log out, simply click Log Out in the navbar.
 
+You can access the application for use at https://you-canoe-it.herokuapp.com/
 
 ## Built With
 
