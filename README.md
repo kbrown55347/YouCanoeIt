@@ -1,4 +1,5 @@
 # YouCanoeIt
+*Duration: 3 weeks*
 
 YouCanoeIt is a mobile-first application that provides a place for people to document their adventures to the Boundary Waters Canoe Area Wilderness (BWCAW). Users can create a profile where they are able to add, view, edit, and delete information about trips taken to the BWCAW. They can then refer back to these trips when planning for upcoming ones, when sharing suggestions and experiences with others, or when simply feeling nostalgic! YouCanoeIt is a CRUD application that I designed and created from start to finish.
 
@@ -49,6 +50,7 @@ CLOUDINARY_API_SECRET=yourSecret
 
 5. To log out, simply click Log Out in the navbar.
 
+You can access the application for use at https://you-canoe-it.herokuapp.com/
 
 ## Built With
 
