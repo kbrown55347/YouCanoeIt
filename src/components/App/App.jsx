@@ -118,6 +118,7 @@ function App() {
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
+            {/* 404 - not found */}
             <h1>404</h1>
           </Route>
         </Switch>

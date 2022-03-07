@@ -22,6 +22,7 @@ const storage = new CloudinaryStorage({
   },
 });
 
+// tell multer where images should be kept
 const cloudinaryUpload = multer({ storage: storage });
 
 // This GET route returns logged in users past trips
